@@ -1,12 +1,12 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import {Container} from '@mui/material';
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { Container, Grid } from "@mui/material";
 
-
-import Header from '../components/header';
-import styles from '../styles/Home.module.css';
-
+import Header from "../components/header";
+import Search from "../components/search";
+import Footer from "../components/footer";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
@@ -17,25 +17,20 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-    <Container>
-    <Header/>
-    </Container>
-      
+      <Container>
+        <Header />
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+        <Grid container>
+          <Grid item xs={2} sm={9} md={6}>
+            <Search />
+          </Grid>
+          <Grid item xs={2} sm={4} md={6}></Grid>
+        </Grid>
+
+        <Footer />
+      </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
