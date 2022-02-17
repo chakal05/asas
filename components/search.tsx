@@ -52,7 +52,7 @@ export default function RecipeReviewCard() {
   ];
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} elevation={5} >
       <CardHeader
         title="Welcom to Asas"
         subheader={`Date: ${new Date().toISOString().substring(0, 10)}`}

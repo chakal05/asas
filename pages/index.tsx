@@ -1,14 +1,13 @@
-import type { NextPage } from "next";
+import React, { ReactNode } from "react";
+import type { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { Container, Grid } from "@mui/material";
 
-import Header from "../components/header";
 import Search from "../components/search";
-import Footer from "../components/footer";
 import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ data } : any ) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -18,19 +17,30 @@ const Home: NextPage = () => {
       </Head>
 
       <Container>
-        <Header />
-
         <Grid container>
           <Grid item xs={2} sm={9} md={6}>
             <Search />
           </Grid>
-          <Grid item xs={2} sm={4} md={6}></Grid>
+          <Grid item xs={2} sm={4} md={6}>
+            {data.map((item: any) => {
+              return <p key={item?.id}> {data.length} </p>;
+            })}
+          </Grid>
         </Grid>
-
-        <Footer />
       </Container>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const res = await fetch("https://fakestoreapi.com/products");
+  const data = await res.json();
+  
+  return {
+    props: {
+      data,
+    },
+  };
 };
 
 export default Home;
