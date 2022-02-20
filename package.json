@@ -12,13 +12,9 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.4.2",
     "@mui/material": "^5.4.2",
-    "@reduxjs/toolkit": "^1.7.2",
-    "@types/react-redux": "^7.1.22",
-    "nanoid": "^3.3.1",
     "next": "12.0.10",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-redux": "^7.2.6"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@types/node": "17.0.18",

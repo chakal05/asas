@@ -1,5 +1,7 @@
-import React, { ReactNode } from "react";
-import type { NextPage, GetStaticProps } from "next";
+import React, { useContext, useEffect } from "react";
+import type { NextPage } from "next";
+import { AppContext } from "../features/getProducts";
+
 import Head from "next/head";
 import Image from "next/image";
 import { Container, Grid } from "@mui/material";
@@ -7,7 +9,22 @@ import { Container, Grid } from "@mui/material";
 import Search from "../components/search";
 import styles from "../styles/Home.module.css";
 
-const Home: NextPage = ({ data } : any ) => {
+const Home: NextPage = () => {
+  const { state, dispatch } = useContext(AppContext);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetch("https://fakestoreapi.com/products");
+      const data = await res.json();
+      return dispatch({
+        type: "ADD_PRODUCTS",
+        payload: [...data],
+      });
+    };
+
+    getData();
+  });
+
   return (
     <div className={styles.container}>
       <Head>
@@ -22,25 +39,20 @@ const Home: NextPage = ({ data } : any ) => {
             <Search />
           </Grid>
           <Grid item xs={2} sm={4} md={6}>
-            {data.map((item: any) => {
-              return <p key={item?.id}> {data.length} </p>;
-            })}
+            <div>
+              {state.products.map((item) => {
+                return (
+                  <div key={item.id}>
+                    <p> {item.title} </p>
+                  </div>
+                );
+              })}
+            </div>
           </Grid>
         </Grid>
       </Container>
     </div>
   );
-};
-
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
-  const data = await res.json();
-  
-  return {
-    props: {
-      data,
-    },
-  };
 };
 
 export default Home;

@@ -1,19 +1,18 @@
 import "../styles/globals.css";
-import { Provider } from "react-redux";
+import { AppProvider } from '../features/getProducts'
 import type { AppProps } from "next/app";
-import { store } from "../redux/store";
 import { Container } from "@mui/material";
 import Header from "../components/header";
 import Footer from "../components/footer";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
+    <AppProvider >
       <Container>
         <Header />
         <Component {...pageProps} />
         <Footer />
       </Container>
-    </Provider>
+    </AppProvider>
   );
 }
 
