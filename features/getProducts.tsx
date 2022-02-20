@@ -6,14 +6,21 @@ type ProductType = {
   price: number;
   description: string;
   category: string;
-  images: string[];
+  image: string;
   city: string;
   added: string;
+  posterId: number;
 };
 
 type InitialStateType = {
   products: ProductType[];
 };
+
+type ProductActions = {
+  type: string;
+  payload: any;
+};
+
 
 const initialState: InitialStateType = {
   products: [],
@@ -27,10 +34,6 @@ const AppContext = createContext<{
   dispatch: () => null,
 });
 
-type ProductActions = {
-  type: string;
-  payload: ProductType[];
-};
 
 export const productReducer = (
   state: ProductType[],
@@ -39,7 +42,17 @@ export const productReducer = (
   switch (action.type) {
     case "ADD_PRODUCTS":
       return [...action.payload];
-
+      case 'SORT_BY_TEXT':
+        return {
+          ...state,
+          text: action.payload,
+        };
+      case 'SORT_BY_JOBTYPE':
+        return {
+          ...state,
+          jobType: action.payload,
+        };
+    
     default:
       return state;
   }

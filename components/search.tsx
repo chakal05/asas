@@ -1,5 +1,8 @@
 import * as React from "react";
-import {useRouter} from 'next/router';
+import { useRouter } from "next/router";
+
+import { AppContext } from "../features/getProducts";
+
 import {
   Card,
   CardContent,
@@ -24,22 +27,14 @@ export default function RecipeReviewCard() {
   };
 
   const handleSubmit = () => {
-    switch (product) {
-      case "":
-        {
-          console.log("product empty");
-          console.log(city);
-        }
-        break;
-      case product:
-        {
-          setProduct("");
-          setCity("All over Djibouti");
-            router.push('/annonser')
-        }
-        break;
-    }
+          router.push({
+            pathname: "/posts/",
+            query: { city, product },
+          });
   };
+
+  // todo - city and product should not change or 
+  // todo - should be retrrieved in pages
 
   const cities = [
     "Djibouti City",
@@ -52,7 +47,7 @@ export default function RecipeReviewCard() {
   ];
 
   return (
-    <Card sx={{ maxWidth: 345 }} elevation={5} >
+    <Card  elevation={5}>
       <CardHeader
         title="Welcom to Asas"
         subheader={`Date: ${new Date().toISOString().substring(0, 10)}`}

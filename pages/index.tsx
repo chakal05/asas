@@ -12,6 +12,10 @@ import styles from "../styles/Home.module.css";
 const Home: NextPage = () => {
   const { state, dispatch } = useContext(AppContext);
 
+
+
+  // TODO Add axios and cors policy
+
   useEffect(() => {
     const getData = async () => {
       const res = await fetch("https://fakestoreapi.com/products");
@@ -39,15 +43,7 @@ const Home: NextPage = () => {
             <Search />
           </Grid>
           <Grid item xs={2} sm={4} md={6}>
-            <div>
-              {state.products.map((item) => {
-                return (
-                  <div key={item.id}>
-                    <p> {item.title} </p>
-                  </div>
-                );
-              })}
-            </div>
+           <h1> INDEX PAGE  </h1>
           </Grid>
         </Grid>
       </Container>

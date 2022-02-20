@@ -1,4 +1,5 @@
 import * as React from "react";
+import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,14 +12,18 @@ export default function ButtonAppBar() {
       <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar>
           <div style={{ flexGrow: 1 }}>
-            <Button color="inherit">logo</Button>
+            <Link href="/">
+              <a>
+                <Button color="inherit">logo</Button>{" "}
+              </a>
+            </Link>
           </div>
           <div>
-            <Button color="inherit">Add post</Button>
-            <Button color="inherit"> Posts </Button>
-            <Button color="inherit">Messages</Button>
-            <Button color="inherit">Wachlist</Button>
-            <Button color="inherit">Login</Button>
+            <Link href="/annonser">
+              <a>
+                <Button color="inherit"> Les annonces </Button>{" "}
+              </a>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
