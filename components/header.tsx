@@ -19,7 +19,7 @@ export default function ButtonAppBar() {
             </Link>
           </div>
           <div>
-            <Link href="/annonser">
+            <Link href="/posts">
               <a>
                 <Button color="inherit"> Les annonces </Button>{" "}
               </a>

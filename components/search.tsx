@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useRouter } from "next/router";
 
-import { AppContext } from "../features/getProducts";
+import { counterSlice } from "../features/productsSlice";
 
 import {
   Card,
@@ -33,7 +33,7 @@ export default function RecipeReviewCard() {
           });
   };
 
-  // todo - city and product should not change or 
+  // todo - city and product should not change or
   // todo - should be retrrieved in pages
 
   const cities = [

@@ -15,14 +15,15 @@ import {
 } from "@mui/material";
 
 import Search from "../components/search";
+import { useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
 
-import { AppContext } from "../features/getProducts";
 
 const Annonser: NextPage = () => {
 
-  // TODO Sort product according to btns 
+  // TODO Sort product according to btns
 
-  const { state, dispatch } = useContext(AppContext);
+	const { products } = useAppSelector((state: RootState) => state.produts);
   const router = useRouter();
   const { city, product } = router.query;
   return (
@@ -36,7 +37,7 @@ const Annonser: NextPage = () => {
             {" "}
             {city} {product}{" "}
           </h1>
-          {state.products.map((item) => {
+          {products.map((item) => {
             return (
               <Card sx={{ maxWidth: 345 }} key={item.id}>
                 <CardMedia
