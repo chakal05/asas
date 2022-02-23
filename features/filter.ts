@@ -18,14 +18,16 @@ const filter = (products: ProductType[], { filters }: FilterState) => {
 
 			const getByText = textInTitle || textInDescription;
 			const getByCIty = item.city.toLowerCase().match(city.toLowerCase());
-			const getByCategory = item.category.toLowerCase()
+			const getByCategory = item.category
+				.toLowerCase()
 				.match(category.toLowerCase());
 
-			if (!title && city === 'All over Djibouti') return item;
-
 			if (title && city === 'All over Djibouti') return getByText;
+			if (title && city !== 'All over Djibouti') return getByText && getByCIty;
+			if (!title && city !== 'All over Djibouti') return getByCIty;
+			if (city === 'All over Djibouti') return item;
 
-			return (getByText && getByCIty );
+			return item;
 		}
 	);
 };

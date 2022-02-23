@@ -28,18 +28,16 @@ export default function RecipeReviewCard() {
 	};
 
 	const handleSubmit = () => {
-		dispatch(filterByCity(city));
 
+		dispatch(filterByCity(city));
 		dispatch(filterByText(product));
 
 		router.push({
-			pathname: '/posts/',
+			pathname: '/products/',
 		});
 	};
 
-	// todo - city and product should not change or
-	// todo - should be retrrieved in pages
-
+	
 	const cities = [
 		'Djibouti City',
 		'Ali-Sabieh',
