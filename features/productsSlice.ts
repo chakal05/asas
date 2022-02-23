@@ -23,8 +23,8 @@ export const getProductsAsync = createAsyncThunk('data/products', async () => {
 	return result;
 });
 
-export const counterSlice = createSlice({
-	name: 'counter',
+export const productSlice = createSlice({
+	name: 'getProducts',
 	initialState,
 	// The `reducers` field lets us define reducers and generate associated actions
 	reducers: {
@@ -52,7 +52,7 @@ export const counterSlice = createSlice({
 
 export const {
 	increment,
-} = counterSlice.actions;
+} = productSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -70,4 +70,4 @@ export const {
 //     }
 //   };
 
-export default counterSlice.reducer;
+export default productSlice.reducer;

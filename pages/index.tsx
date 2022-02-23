@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps, GetStaticPropsContext } from 'next';
 
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
@@ -11,7 +11,6 @@ import Search from '../components/search';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
-
 import { getProductsAsync } from '../features/productsSlice';
 
 const Home: NextPage = () => {
@@ -20,11 +19,11 @@ const Home: NextPage = () => {
 	// TODO Add axios and cors policy
 
 	useEffect(() => {
-	//	const getData = () => {
-			dispatch(getProductsAsync());
-	//	};
+		//	const getData = () => {
+		dispatch(getProductsAsync());
+		//	};
 
-	//	getData();
+		//	getData();
 	});
 
 	return (
@@ -42,13 +41,12 @@ const Home: NextPage = () => {
 					</Grid>
 					<Grid item xs={2} sm={4} md={6}>
 						<h1> Counter </h1>
-
-
 					</Grid>
 				</Grid>
 			</Container>
 		</div>
 	);
 };
+
 
 export default Home;
