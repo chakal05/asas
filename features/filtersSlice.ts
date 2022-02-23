@@ -1,16 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FilterState } from '../interfaces';
 
-interface filterState {
+const initialState: FilterState = {
 	filters: {
-		text: string;
-		city: string;
-	};
-}
-
-const initialState: filterState = {
-	filters: {
-		text: '',
+		id: 0,
+		title: '',
 		city: '',
+		added: '',
+		category: '',
+		price: 0,
 	},
 };
 
@@ -19,10 +17,13 @@ export const filtersSlice = createSlice({
 	initialState,
 	reducers: {
 		filterByText: (state, { payload }: PayloadAction<string>) => {
-			state.filters.text = payload;
+			state.filters.title = payload;
 		},
 		filterByCity: (state, { payload }: PayloadAction<string>) => {
 			state.filters.city = payload;
+		},
+		filterByCategory: (state, { payload }: PayloadAction<string>) => {
+			state.filters.category = payload;
 		},
 	},
 });

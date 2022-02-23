@@ -11,7 +11,7 @@ const initialState: DataState = {
 // typically used to make async requests.
 
 export const getProductsAsync = createAsyncThunk('data/products', async () => {
-	const response = await fetch('https://fakestoreapi.com/products', {
+	const response = await fetch('api/mockData', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

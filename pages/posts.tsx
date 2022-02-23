@@ -25,14 +25,13 @@ const Posts: NextPage = () => {
 
 	const { filters } = useAppSelector((state: RootState) => state.filters);
 	const { products } = useAppSelector((state: RootState) => state.produts);
-	const filteredByName: ProductType[] = filter(products, filters);
+	const filteredByName: ProductType[] = filter(products, { filters });
 
 	// products.filter((item) =>
 	// 	item.title.toLowerCase().includes('men')
 	// );
 
 	const router = useRouter();
-	const { city, product } = router.query;
 	return (
 		<Container>
 			<Grid container>
@@ -41,8 +40,7 @@ const Posts: NextPage = () => {
 				</Grid>
 				<Grid item xs={2} sm={9} md={12}>
 					<h1>
-						{' '}
-						{city} {product}{' '}
+					{filteredByName.length}
 					</h1>
 					{filteredByName.map((item) => {
 						return (
@@ -62,8 +60,8 @@ const Posts: NextPage = () => {
 									</Typography>
 								</CardContent>
 								<CardActions>
-									<Button size='small'>Share</Button>
-									<Button size='small'>Learn More</Button>
+									<Button size='small'>{item.city}</Button>
+									<Button size='small'>Learn More </Button>
 								</CardActions>
 							</Card>
 						);

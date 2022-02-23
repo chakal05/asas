@@ -1,17 +1,27 @@
-export interface ProductType  {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-    // city: string;
-    // added: string;
-    // posterId: number;
-  };
+export interface ProductType {
+	id: number;
+	title: string;
+	price: number;
+	description: string;
+	category: string;
+	image: string;
+	city: string;
+	added: string;
+	userId: string;
+}
 
+export interface DataState {
+	products: ProductType[];
+	// status: 'idle' | 'loading' | 'failed'
+}
 
-  export interface DataState {
-    products: ProductType[]
-   // status: 'idle' | 'loading' | 'failed'
-  }
+export interface FilterState {
+	filters: {
+		id: number;
+		title: string;
+		price: number;
+		category: string;
+		city: string;
+		added: string;
+	};
+}
