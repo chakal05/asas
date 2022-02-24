@@ -28,7 +28,6 @@ export default function RecipeReviewCard() {
 	};
 
 	const handleSubmit = () => {
-
 		dispatch(filterByCity(city));
 		dispatch(filterByText(product));
 
@@ -37,7 +36,6 @@ export default function RecipeReviewCard() {
 		});
 	};
 
-	
 	const cities = [
 		'Djibouti City',
 		'Ali-Sabieh',
@@ -49,45 +47,50 @@ export default function RecipeReviewCard() {
 	];
 
 	return (
-		<Card elevation={5}>
-			<CardHeader
-				title='Welcom to Asas'
-				subheader={`Date: ${new Date().toISOString().substring(0, 10)}`}
-			/>
-			<CardContent>
-				<div style={{ marginBottom: '1rem' }}>
-					<TextField
-						fullWidth
-						id='outlined-basic'
-						label='What are you looking for?'
-						variant='outlined'
+		<div className='shadow-md border-2  m-3 rounded'>
+			<div className='pl-5 my-3'>
+				<p className='text-4xl font-700'> Welcome to Asas</p>
+				<p className='text-xl ml-2 mt-1 text-slate-600'>
+					{`Date: ${new Date().toISOString().substring(0, 10)}`}{' '}
+				</p>
+			</div>
+			<div className='my-5 mx-3'>
+				<div className='mb-3 '>
+					<input
+						className=' border border-slate-300  rounded-md w-full p-3 '
 						value={product}
 						onChange={handleProduct}
+						placeholder={'What are you looking for?'}
 					/>
 				</div>
-				<div>
-					<TextField
-						id='outlined-select-currency'
-						select
-						fullWidth
-						label='Choose city'
-						helperText='Please select your city'
+				<form>
+					<label className='block'>
+						<span className='block text-sm font-medium text-slate-700'>
+							Choose city{' '}
+						</span>
+					<select
 						value={city}
 						onChange={handleCity}
+						className='border border-slate-300 bg-white text-slate-700 rounded-md w-full my-1 py-4'
 					>
 						{cities.map((option, index) => (
-							<MenuItem key={index} value={option}>
+							<option key={index} value={option}>
 								{option}
-							</MenuItem>
+							</option>
 						))}
-					</TextField>
-				</div>
-			</CardContent>
-			<CardActions style={{ display: 'flex', justifyContent: 'center' }}>
-				<Button onClick={handleSubmit} variant='outlined'>
+					</select>
+					</label>
+
+				</form>
+			</div>
+			<div className='flex justify-center'>
+				<button
+					onClick={handleSubmit}
+					className='border bg-slate-600 text-white rounded p-2 mb-4 w-32'
+				>
 					Search
-				</Button>
-			</CardActions>
-		</Card>
+				</button>
+			</div>
+		</div>
 	);
 }

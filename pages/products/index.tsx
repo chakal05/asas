@@ -28,11 +28,11 @@ const Posts: NextPage = () => {
 	return (
 		<Container>
 			<Grid container>
-				<Grid item xs={2} sm={9} md={12}>
+				<Grid item xs={12}>
 					<Search />
 				</Grid>
-				<Grid item xs={2} sm={9} md={12}>
-					<h1>{filteredByName.length}</h1>
+				<Grid item  xs={12} >
+					<h1 className='text-3xl font-bold text-center my-7'>  {filteredByName.length} PRODUCTS </h1>
 					{filteredByName.map((item) => {
 						return (
 							<Link
@@ -48,26 +48,28 @@ const Posts: NextPage = () => {
 								passHref
 								key={item.id}
 							>
-								<Card sx={{ maxWidth: 345 }}>
-									<CardMedia
-										component='img'
-										height='140'
-										image={item.image}
-										alt='green iguana'
-									/>
-									<CardContent>
-										<Typography gutterBottom variant='h5' component='div'>
-											{item.title}
-										</Typography>
-										<Typography variant='body2' color='text.secondary'>
-											{item.description}
-										</Typography>
-									</CardContent>
-									<CardActions>
-										<Button size='small'>{item.city}</Button>
-										<Button size='small'>Learn More </Button>
-									</CardActions>
-								</Card>
+								<a>
+									<Card sx={{ marginBottom:'1rem' }}>
+										<CardMedia
+											component='img'
+											height='140'
+											image={item.image}
+											alt='green iguana'
+										/>
+										<CardContent>
+											<Typography gutterBottom variant='h5' component='div'>
+												{item.title}
+											</Typography>
+											<Typography variant='body2' color='text.secondary'>
+												{item.description}
+											</Typography>
+										</CardContent>
+										<CardActions>
+											<Button size='small'>{item.city}</Button>
+											<Button size='small'>Learn More </Button>
+										</CardActions>
+									</Card>
+								</a>
 							</Link>
 						);
 					})}

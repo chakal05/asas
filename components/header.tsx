@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 
 export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <div>
       <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar>
           <div style={{ flexGrow: 1 }}>
@@ -19,7 +19,7 @@ export default function ButtonAppBar() {
             </Link>
           </div>
           <div>
-            <Link href="/posts">
+            <Link href="/products/">
               <a>
                 <Button color="inherit"> Les annonces </Button>{" "}
               </a>
@@ -27,6 +27,6 @@ export default function ButtonAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-    </Box>
+    </div>
   );
 }
