@@ -1,6 +1,18 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+// /*
+//  * @type {import('next').NextConfig}
+//  *
+//  */
+// const nextConfig = {
+// 	reactStrictMode: true,
+// 	images: {
+// 		domains: ['fakestoreapi.com'],
+// 	},
+// };
 
-module.exports = nextConfig
+// export default nextConfig;
+
+module.exports = {
+  images: {
+    domains: ['fakestoreapi.com'],
+  },
+}

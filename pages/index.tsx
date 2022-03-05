@@ -1,21 +1,22 @@
-import React, { useContext, useEffect } from 'react';
-import type { NextPage, GetStaticProps, GetStaticPropsContext } from 'next';
-
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Container, Grid } from '@mui/material';
-
 import Search from '../components/search';
-
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
-
+import { useAppDispatch } from '../redux/hooks';
 import { getProductsAsync } from '../features/productsSlice';
+import MyO from '../public/assets/ryan-ancill-aJYO8JmVodY-unsplash.jpg';
 
 const Home: NextPage = () => {
 	const dispatch = useAppDispatch();
 
-	// TODO Add axios and cors policy
+	const categories = [
+		{
+			id: 1,
+			icon: MyO,
+			title: 'Vehicules',
+		},
+	];
 
 	useEffect(() => {
 		dispatch(getProductsAsync());
@@ -34,8 +35,41 @@ const Home: NextPage = () => {
 					<div className=''>
 						<Search />
 					</div>
-					<div className=''>
-					</div>
+					{/* <div className='mx-2 p-2'>
+						<p className='my-4 text-xl font-bold '>
+							{' '}
+							Decouvrez nos categories{' '}
+						</p>
+						<div className='text-center'>
+							<ul className=' grid grid-cols-3 gap-2 md:grid-cols-9 md:gap-4 '>
+								{categories.map((item) => {
+									return (
+										<li key={item.id} className=' '>
+											<div className=' '>
+											<a href='#' className=''>
+												<Image
+													className='rounded-full'
+													src={item.icon}
+													width={80}
+													height={80}
+													alt='dsd'
+												/>
+
+												{item.title}
+											</a>
+											</div>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+						<p className='my-10 text-xl font-thin text-right '>
+							<a href='#' className='underline hover:underline-offset-4'>
+								{' '}
+								Toutes nos categories{' '}
+							</a>
+						</p>
+					</div> */}
 				</div>
 			</div>
 		</div>

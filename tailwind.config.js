@@ -1,4 +1,6 @@
 module.exports = {
+	mode: 'jit',
+	purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
 		'./components/**/*.{js,ts,jsx,tsx}',
@@ -22,7 +24,11 @@ module.exports = {
 				display: ['roboto'],
 				body: ['"roboto"'],
 			},
+			colors: {
+				primary: 'rgb(6, 6, 61)',
+				secondary:'#F07046'
+			},
 		},
 	},
-	plugins: [],
+	plugins: [require('tailwindcss'), require('autoprefixer')],
 };
