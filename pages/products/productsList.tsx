@@ -35,7 +35,7 @@ const Posts: NextPage = () => {
 								href={{
 									pathname: `/products/productItem`,
 									query: {
-										id: item.id,
+										id  : item.id,
 										title: item.title,
 										description: item.description,
 										img: item.image,

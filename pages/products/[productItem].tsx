@@ -16,7 +16,7 @@ const Product = () => {
 				</div>
 
 				<div className='text-center mb-5'>
-					<Image src={img} width='400px' height='400px' alt='title' />
+					<Image src={img as any} width='400px' height='400px' alt='title' />
 				</div>
 
 				<div className='text-center'>
