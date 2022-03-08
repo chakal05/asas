@@ -7,25 +7,31 @@ const Product = () => {
 	const { id, title, category, description, img, price } = router.query;
 
 	return (
-		<div className='container'>
+		<div>
 			{' '}
-			<div className='border-2 shadow-2xl p-5 mx-5 mt-2 mb-2 md:mt-10 '>
-				<div className='grid grid-cols-2 text-center'>
-					<p className='mb-5'>Product category: {category}</p>
-					<p className='mb-5'>Product reference: {id}</p>
-				</div>
-
-				<div className='text-center mb-5'>
+			<div className=' p-5 mx-5 mt-2 text-center '>
+				<div className='p-5  mb-5'>
 					<Image src={img as any} width='400px' height='400px' alt='title' />
 				</div>
 
-				<div className='text-center'>
+				<div>
 					<div>
 						<p className='text-2xl font-bold '> {title} </p>
 						<p className='my-3 underline'> {price} Fdj </p>
 					</div>
-					<div className=''>
-						<p className='w-3/4 m-auto'> {description} </p>
+					<div className='grid grid-cols-2 text-center my-12'>
+						<p className='text-lg'>
+							Product category:<span className='font-bold'> {category}</span>
+						</p>
+						<p className='text-lg'>
+							Product reference: <span className='font-bold'> {id}</span>
+						</p>
+					</div>
+					<div>
+						<p className='w-2/4 mx-auto font-bold text-lg '>
+							{' '}
+							Beskrivning : <span className='font-thin'> {description}</span>{' '}
+						</p>
 					</div>
 				</div>
 			</div>
