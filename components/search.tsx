@@ -28,7 +28,7 @@ export default function RecipeReviewCard() {
 
 		router.push({
 			pathname:'/products/productsList',
-			
+
 		});
 
 	};
@@ -46,9 +46,9 @@ export default function RecipeReviewCard() {
 	return (
 		<div className='shadow-md  border-2  m-3 rounded'>
 			<div className='pl-5 mt-3'>
-				<p className='text-2xl font-700'> Welcome to Asas</p>
+				<p className='text-2xl font-700'> Welcome to Sams</p>
 				<p className='text-md mt-1 text-slate-600'>
-					{`Date: ${new Date().toISOString().substring(0, 10)}`}
+					{`Today: ${new Date().toISOString().substring(0, 10)}`}
 				</p>
 			</div>
 			<div className='my-5 mx-3 '>

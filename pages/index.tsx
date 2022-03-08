@@ -30,12 +30,25 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<div>
-				<div className='my-3'>
+			<div className='mt-3'>
+				<div className='md:grid grid-cols-2'>
 					<div className=''>
 						<Search />
 					</div>
-					{/* <div className='mx-2 p-2'>
+
+					<div className=' hidden text-center md:flex'>
+						<p className='text-5xl font-bold   p-5 md:self-center '> {`Buy and sell on Djibouti's safest classified ads `} </p>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default Home;
+
+{
+	/* <div className='mx-2 p-2'>
 						<p className='my-4 text-xl font-bold '>
 							{' '}
 							Decouvrez nos categories{' '}
@@ -69,11 +82,5 @@ const Home: NextPage = () => {
 								Toutes nos categories{' '}
 							</a>
 						</p>
-					</div> */}
-				</div>
-			</div>
-		</div>
-	);
-};
-
-export default Home;
+					</div> */
+}

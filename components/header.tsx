@@ -1,32 +1,22 @@
-import * as React from "react";
-import Link from "next/link";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import * as React from 'react';
+import Link from 'next/link';
 
 export default function ButtonAppBar() {
-  return (
-    <div>
-      <AppBar position="static" color="inherit" elevation={0}>
-        <Toolbar>
-          <div style={{ flexGrow: 1 }}>
-            <Link href="/">
-              <a>
-                <Button color="inherit">logo</Button>{" "}
-              </a>
-            </Link>
-          </div>
-          <div>
-            <Link href="/products/productsList/">
-              <a>
-                <Button color="inherit"> Les annonces </Button>{" "}
-              </a>
-            </Link>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+	return (
+		<div className=' p-3 '>
+			<div className='flex'>
+				<div className='basis-1/4'>
+					<Link href='/'>
+						<a className='text-md'>LOGO  </a>
+					</Link>
+				</div>
+
+				<div className='basis-3/4 text-right '>
+					<Link href='/products/productsList/'>
+						<a className='text-md'>ADVERTISEMENTS  </a>
+					</Link>
+				</div>
+			</div>
+		</div>
+	);
 }

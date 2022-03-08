@@ -17,25 +17,25 @@ const Posts: NextPage = () => {
 	const filtered: ProductType[] = filter(products, { filters });
 
 	return (
-		<div className='container'>
+		<div>
 			<div>
 				<div>
 					<Search />
 				</div>
-				<div className='text-center my-5'>
-					<p className='text-xl font-bold'>
+				<div className='text-center my-12'>
+					<p className='text-xl font-bold underline'>
 						{' '}
 						{`${filtered.length} items found`}{' '}
 					</p>
 				</div>
-				<div>
+				<div >
 					{filtered.map((item) => {
 						return (
 							<Link
 								href={{
 									pathname: `/products/productItem`,
 									query: {
-										id  : item.id,
+										id: item.id,
 										title: item.title,
 										description: item.description,
 										img: item.image,
@@ -47,16 +47,16 @@ const Posts: NextPage = () => {
 								key={item.id}
 							>
 								<a>
-									<div className='border-2 my-5 shadow-lg h-30 p-4 flex flex-row'>
-										<div className='basis-1/4 text-center'>
+									<div className='border-2 my-5 mx-3 rounded shadow-lg h-30 p-4 flex flex-row '>
+										<div className='basis-1/4 text-center pt-3 md:pt-0 '>
 											<Image
 												src={item.image}
 												alt='sr'
-												width={200}
+												width={150}
 												height={150}
 											/>
 										</div>
-										<div className='basis-3/4 '>
+										<div className='basis-3/4 p-2 '>
 											<p className='text-2xl font-thin'>{item.title}</p>
 											<p>{item.description}</p>
 											<div className='grid grid-cols-2 text-center my-3 '>

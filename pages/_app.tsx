@@ -12,7 +12,7 @@ import Footer from '../components/footer';
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<Provider store={store}>
-			<div className='md:container'>
+			<div className='container'>
 				<Header />
 				<Component {...pageProps} />
 				<Footer />
