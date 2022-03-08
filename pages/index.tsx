@@ -23,50 +23,47 @@ import {
 	faShirt,
 } from '@fortawesome/free-solid-svg-icons';
 
-import MyO from '../public/assets/ryan-ancill-aJYO8JmVodY-unsplash.jpg';
+const categories = [
+	{
+		id: 1,
+		icon: faCar,
+		title: 'Vehicules',
+	},
+	{
+		id: 2,
+		icon: faBed,
+		title: 'For the home',
+	},
+
+	{
+		id: 4,
+		icon: faShirt,
+		title: 'Clothes',
+	},
+	{
+		id: 5,
+		icon: faMobilePhone,
+		title: 'Electronics',
+	},
+	{
+		id: 6,
+		icon: faFutbol,
+		title: 'Sport & hobbies',
+	},
+	{
+		id: 7,
+		icon: faBriefcase,
+		title: 'Jobs',
+	},
+	{
+		id: 3,
+		icon: faHome,
+		title: 'Maisons',
+	},
+];
 
 const Home: NextPage = () => {
 	const dispatch = useAppDispatch();
-
-	const categories = [
-		{
-			id: 1,
-			icon: faCar,
-			title: 'Vehicules',
-		},
-		{
-			id: 2,
-			icon: faBed,
-			title: 'For the home',
-		},
-
-		{
-			id: 4,
-			icon: faShirt,
-			title: 'Clothes',
-		},
-		{
-			id: 5,
-			icon: faMobilePhone,
-			title: 'Electronics',
-		},
-		{
-			id: 6,
-			icon: faFutbol,
-			title: 'Sport & hobbies',
-		},
-		{
-			id: 7,
-			icon: faBriefcase,
-			title: 'Jobs',
-		},
-		{
-			id: 3,
-			icon: faHome,
-			title: 'Maisons',
-		},
-	];
-
 	useEffect(() => {
 		dispatch(getProductsAsync());
 	});
@@ -97,10 +94,10 @@ const Home: NextPage = () => {
 			<div className='mx-2 mt-12 p-2'>
 				<p className=' text-xl font-bold '> Discover our categories </p>
 				<div className=''>
-					<ul className='flex justify-center my-3'>
+					<ul className=' md:flex justify-center my-3'>
 						{categories.map((item) => {
 							return (
-								<li key={item.id} className='mx-5 text-center'>
+								<li key={item.id} className='m-5 text-center '>
 									<Link href='#' passHref>
 										<div>
 											<a href='#' className='flex flex-col'>
@@ -123,6 +120,42 @@ const Home: NextPage = () => {
 						Toutes nos categories{' '}
 					</a>
 				</p>
+			</div>
+
+			<div className='mt-16'>
+				<p className='font-bold text-4xl my-8 text-center'> Our Services </p>
+				<div className='md:flex flex-row '>
+					<div className='border-2 shadow-md mx-5 my-5 p-3 '>
+						<p className='font-bold text-xl'> Lorem Ipsum </p>
+						<p>
+							{' '}
+							Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+							cupidatat non proident, sunt in culpa qui officia deserunt mollit
+							anim id est laborum.{' '}
+						</p>
+					</div>
+					<div className='border-2 shadow-md mx-5 my-5 p-3 '>
+						<p className='font-bold text-xl'> Lorem Ipsum </p>
+						<p>
+							{' '}
+							Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+							cupidatat non proident, sunt in culpa qui officia deserunt mollit
+							anim id est laborum.{' '}
+						</p>
+					</div>
+					<div className='border-2 shadow-md mx-5 my-5 p-3 '>
+						<p className='font-bold text-xl'> Lorem Ipsum </p>
+						<p>
+							{' '}
+							Duis aute irure dolor in reprehenderit in voluptate velit esse
+							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+							cupidatat non proident, sunt in culpa qui officia deserunt mollit
+							anim id est laborum.{' '}
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
