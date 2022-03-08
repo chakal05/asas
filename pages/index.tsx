@@ -27,12 +27,12 @@ const categories = [
 	{
 		id: 1,
 		icon: faCar,
-		title: 'Vehicules',
+		title: 'Car',
 	},
 	{
 		id: 2,
 		icon: faBed,
-		title: 'For the home',
+		title: 'Furniture',
 	},
 
 	{
@@ -58,7 +58,7 @@ const categories = [
 	{
 		id: 3,
 		icon: faHome,
-		title: 'Maisons',
+		title: 'Homes',
 	},
 ];
 
