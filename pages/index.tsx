@@ -1,10 +1,28 @@
 import React, { useEffect } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
+import Link from 'next/link';
 import Search from '../components/search';
 import { useAppDispatch } from '../redux/hooks';
 import { getProductsAsync } from '../features/productsSlice';
+
+// Import the FontAwesomeIcon component
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import the icons you need
+import {
+	faSearch,
+	faAmbulance,
+	faAnchor,
+	faCar,
+	faHome,
+	faBriefcase,
+	faMobilePhone,
+	faFutbol,
+	faBed,
+	faDrum,
+	faShirt,
+} from '@fortawesome/free-solid-svg-icons';
+
 import MyO from '../public/assets/ryan-ancill-aJYO8JmVodY-unsplash.jpg';
 
 const Home: NextPage = () => {
@@ -13,8 +31,39 @@ const Home: NextPage = () => {
 	const categories = [
 		{
 			id: 1,
-			icon: MyO,
+			icon: faCar,
 			title: 'Vehicules',
+		},
+		{
+			id: 2,
+			icon: faBed,
+			title: 'For the home',
+		},
+
+		{
+			id: 4,
+			icon: faShirt,
+			title: 'Clothes',
+		},
+		{
+			id: 5,
+			icon: faMobilePhone,
+			title: 'Electronics',
+		},
+		{
+			id: 6,
+			icon: faFutbol,
+			title: 'Sport & hobbies',
+		},
+		{
+			id: 7,
+			icon: faBriefcase,
+			title: 'Jobs',
+		},
+		{
+			id: 3,
+			icon: faHome,
+			title: 'Maisons',
 		},
 	];
 
@@ -37,50 +86,46 @@ const Home: NextPage = () => {
 					</div>
 
 					<div className=' hidden text-center md:flex'>
-						<p className='text-5xl font-bold   p-5 md:self-center '> {`Buy and sell on Djibouti's safest classified ads `} </p>
+						<p className='text-5xl font-bold   p-5 md:self-center '>
+							{' '}
+							{`Buy and sell on Djibouti's safest classified ads `}{' '}
+						</p>
 					</div>
 				</div>
+			</div>
+
+			<div className='mx-2 mt-12 p-2'>
+				<p className=' text-xl font-bold '> Discover our categories </p>
+				<div className=''>
+					<ul className='flex justify-center my-3'>
+						{categories.map((item) => {
+							return (
+								<li key={item.id} className='mx-5 text-center'>
+									<Link href='#' passHref>
+										<div>
+											<a href='#' className='flex flex-col'>
+												<FontAwesomeIcon
+													icon={item.icon}
+													style={{ fontSize: 50, marginBottom: '5px' }}
+												/>
+												{item.title}
+											</a>
+										</div>
+									</Link>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+				<p className=' text-xl font-thin text-right '>
+					<a href='#' className='underline hover:underline-offset-4'>
+						{' '}
+						Toutes nos categories{' '}
+					</a>
+				</p>
 			</div>
 		</div>
 	);
 };
 
 export default Home;
-
-{
-	/* <div className='mx-2 p-2'>
-						<p className='my-4 text-xl font-bold '>
-							{' '}
-							Decouvrez nos categories{' '}
-						</p>
-						<div className='text-center'>
-							<ul className=' grid grid-cols-3 gap-2 md:grid-cols-9 md:gap-4 '>
-								{categories.map((item) => {
-									return (
-										<li key={item.id} className=' '>
-											<div className=' '>
-											<a href='#' className=''>
-												<Image
-													className='rounded-full'
-													src={item.icon}
-													width={80}
-													height={80}
-													alt='dsd'
-												/>
-
-												{item.title}
-											</a>
-											</div>
-										</li>
-									);
-								})}
-							</ul>
-						</div>
-						<p className='my-10 text-xl font-thin text-right '>
-							<a href='#' className='underline hover:underline-offset-4'>
-								{' '}
-								Toutes nos categories{' '}
-							</a>
-						</p>
-					</div> */
-}

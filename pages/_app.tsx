@@ -1,11 +1,12 @@
+import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 import '../styles/globals.css';
-//import { AppProvider } from '../features/getProducts'
 
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 
 import type { AppProps } from 'next/app';
-import { Container } from '@mui/material';
 import Header from '../components/header';
 import Footer from '../components/footer';
 
