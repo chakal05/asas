@@ -1,6 +1,5 @@
 module.exports = {
 	mode: 'jit',
-	purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
 		'./components/**/*.{js,ts,jsx,tsx}',
@@ -11,10 +10,10 @@ module.exports = {
 				center: true,
 				padding: {
 					sm: '2rem',
-					md: '3rem',
-					lg: '4rem',
-					xl: '5rem',
-					'2xl': '6rem',
+					md: '5rem',
+					lg: '7rem',
+					xl: '9rem',
+					'2xl': '17rem',
 				},
 			},
 			fontFamily: {
