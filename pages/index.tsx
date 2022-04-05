@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import type { NextPage } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
 import { getProductsAsync } from '../features/productsSlice';
 
-
 const Home: NextPage = () => {
-	const dispatch = useAppDispatch();
-	useEffect(() => {
-		dispatch(getProductsAsync());
-	});
+	// const dispatch = useAppDispatch();
+	// useEffect(() => {
+	// 	dispatch(getProductsAsync());
+
+	// });
 
 	return (
 		<div>
@@ -21,27 +22,22 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<div className='mt-3'>
-				<div className='md:grid grid-cols-2'>
-					<div>
-						<Search />
-					</div>
-
-					<div className=' hidden text-center md:flex'>
-						<p className='text-5xl font-bold   p-5 md:self-center '>
-							{' '}
-							{`Buy and sell on Djibouti's safest classified ads `}{' '}
-						</p>
-					</div>
+			<div className=' mt-5'>
+				<div className=' hidden text-center  w-4/5 mx-auto  md:flex'>
+					<p className='text-6xl font-bold  p-5 md:self-center '>
+						{`Buy and sell on Djibouti's safest classified ads `}
+					</p>
+				</div>
+				<div className='my-12'>
+					<Search />
 				</div>
 			</div>
 
-			<div>
-				<Categories/>
-				</div>
+			<div className='mt-12'>
+				<Categories />
+			</div>
 
-
-			<div className='mt-16'>
+			<div className='my-16'>
 				<p className='font-bold text-4xl my-8 text-center'> Our Services </p>
 				<div className='md:flex flex-row '>
 					<div className='border-2 shadow-md mx-5 my-5 p-3 '>

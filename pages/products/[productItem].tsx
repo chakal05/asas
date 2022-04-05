@@ -14,7 +14,7 @@ const Product = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<div className=' p-1 mx-1 mt-5 '>
-				<div className='p-5 text-center border-2 rounded  '>
+				<div className='p-5 w-4/5 mx-auto text-center   '>
 					<Image src={img as any} width='300px' height='300px' alt='title' />
 				</div>
 

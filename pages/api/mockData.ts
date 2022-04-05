@@ -1,4 +1,6 @@
 import { ProductType } from '../../interfaces';
+// const { connectToDatabase } = require('../../db/mongo');
+// const ObjectId = require('mongodb').ObjectId;
 
 const fakeData: ProductType[] = [
 	{
@@ -9,7 +11,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
 		city: 'Djibouti City',
 		added: '2022-03-12',
-		userId: '',
+		sellerId: '624706557e53beb38dae2af3',
 		price: 109.95,
 		title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
 	},
@@ -22,7 +24,7 @@ const fakeData: ProductType[] = [
 			'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
 		city: 'Djibouti City',
 		added: '2022-03-04',
-		userId: '',
+		sellerId: '624706557e53beb38dae2af3',
 		price: 22.3,
 		title: 'Mens Casual Premium Slim Fit T-Shirts ',
 	},
@@ -34,7 +36,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg',
 		city: 'Djibouti City',
 		added: '2022-03-05',
-		userId: '',
+		sellerId: '624706557e53beb38dae2af3',
 		price: 55.99,
 		title: 'Mens Cotton Jacket',
 	},
@@ -46,7 +48,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
 		city: 'Ali-Sabieh',
 		added: '2022-03-18',
-		userId: '',
+		sellerId: '624706557e53beb38dae2af3',
 		price: 15.96,
 		title: 'Mens Casual Slim Fit',
 	},
@@ -58,7 +60,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
 		city: 'Ali-Sabieh',
 		added: '2022-03-09',
-		userId: '',
+		sellerId: '624706557e53beb38dae2af3',
 		price: 695,
 		title:
 			"John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
@@ -71,7 +73,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg',
 		city: 'Ali-Sabieh',
 		added: '2022-03-12',
-		userId: '',
+		sellerId: '624709117e53beb38dae2af4',
 		price: 168,
 		title: 'Solid Gold Petite Micropave ',
 	},
@@ -83,7 +85,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg',
 		city: 'Dikhil',
 		added: '2022-03-04',
-		userId: '',
+		sellerId: '624709117e53beb38dae2af4',
 		price: 9.99,
 		title: 'White Gold Plated Princess',
 	},
@@ -95,7 +97,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg',
 		city: 'Dikhil',
 		added: '2022-03-29',
-		userId: '',
+		sellerId: '624709117e53beb38dae2af4',
 		price: 10.99,
 		title: 'Pierced Owl Rose Gold Plated Stainless Steel Double',
 	},
@@ -107,7 +109,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg',
 		city: 'Dikhil',
 		added: '2022-02-12',
-		userId: '',
+		sellerId: '624709117e53beb38dae2af4',
 		price: 64,
 		title: 'WD 2TB Elements Portable External Hard Drive - USB 3.0 ',
 	},
@@ -119,7 +121,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg',
 		city: 'Obock',
 		added: '2022-02-02',
-		userId: '',
+		sellerId: '624709117e53beb38dae2af4',
 		price: 109,
 		title: 'SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s',
 	},
@@ -131,7 +133,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg',
 		city: 'Obock',
 		added: '2022-02-19',
-		userId: '',
+		sellerId: '6247096f7e53beb38dae2af5',
 		price: 109,
 		title:
 			'Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5',
@@ -144,7 +146,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg',
 		city: 'Obock',
 		added: '2022-02-02',
-		userId: '',
+		sellerId: '6247096f7e53beb38dae2af5',
 		price: 114,
 		title:
 			'WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive',
@@ -157,7 +159,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg',
 		city: 'Tadjoura',
 		added: '2022-01-22',
-		userId: '',
+		sellerId: '6247096f7e53beb38dae2af5',
 		price: 599,
 		title: 'Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin',
 	},
@@ -169,7 +171,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg',
 		city: 'Tadjoura',
 		added: '2022-02-24',
-		userId: '',
+		sellerId: '6247096f7e53beb38dae2af5',
 		price: 999.99,
 		title:
 			'Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ',
@@ -182,7 +184,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg',
 		city: 'Tadjoura',
 		added: '2022-01-13',
-		userId: '',
+		sellerId: '6247096f7e53beb38dae2af5',
 		price: 56.99,
 		title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
 	},
@@ -194,7 +196,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg',
 		city: 'Arta',
 		added: '2022-02-27',
-		userId: '',
+		sellerId: '62470a417e53beb38dae2af6',
 		price: 29.95,
 		title:
 			"Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
@@ -208,7 +210,7 @@ const fakeData: ProductType[] = [
 		price: 39.99,
 		city: 'Arta',
 		added: '2022-02-11',
-		userId: '',
+		sellerId: '62470a417e53beb38dae2af6',
 		title: 'Rain Jacket Women Windbreaker Striped Climbing Raincoats',
 	},
 	{
@@ -219,7 +221,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg',
 		city: 'Arta',
 		added: '2022-01-06',
-		userId: '',
+		sellerId: '62470a417e53beb38dae2af6',
 		price: 9.85,
 		title: "MBJ Women's Solid Short Sleeve Boat Neck V ",
 	},
@@ -231,7 +233,7 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg',
 		city: 'Ali-Sabieh',
 		added: '2022-01-26',
-		userId: '',
+		sellerId: '62470a417e53beb38dae2af6',
 		price: 7.95,
 		title: "Opna Women's Short Sleeve Moisture",
 	},
@@ -243,14 +245,30 @@ const fakeData: ProductType[] = [
 		image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
 		city: 'Djibouti City',
 		added: '2022-01-17',
-		userId: '',
+		sellerId: '62470a417e53beb38dae2af6',
 		price: 12.99,
 		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
 	},
 ];
 
+
+
 const resData = (req, res) => {
+
 	res.status(200).json(fakeData);
 };
 
 export default resData;
+
+// import { NextApiRequest, NextApiResponse } from 'next';
+// import { connectToDatabase } from '../../db/mongo';
+
+// export default async function handler(
+// 	req: NextApiRequest,
+// 	res: NextApiResponse
+// ) {
+// 	let { db } = await connectToDatabase();
+
+// 	const blogs = await db.collection('users').find().toArray();
+// 	res.status(200).json({ blogs });
+// }

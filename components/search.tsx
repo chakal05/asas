@@ -27,10 +27,8 @@ export default function RecipeReviewCard() {
 		dispatch(filterByText(product));
 
 		router.push({
-			pathname:'/products/productsList',
-
+			pathname: '/products/productsList',
 		});
-
 	};
 
 	const cities = [
@@ -44,31 +42,30 @@ export default function RecipeReviewCard() {
 	];
 
 	return (
-		<div className='shadow-md  border-2  m-3 rounded'>
-			<div className='pl-5 mt-3'>
-				<p className='text-2xl font-700'> Welcome to Sams</p>
-				<p className='text-md mt-1 text-slate-600'>
-					{`Today: ${new Date().toISOString().substring(0, 10)}`}
-				</p>
-			</div>
+		<div className='bg-slate-200 w-4/5 mx-auto p-1 rounded '>
+
 			<div className='my-5 mx-3 '>
-				<div className='mb-3 '>
-					<input
-						className=' border border-slate-300 rounded-md w-full p-3 '
-						value={product}
-						onChange={handleProduct}
-						placeholder={'What are you looking for?'}
-					/>
-				</div>
-				<form className='flex flex-row'>
-					<label className='block basis-3/4'>
-						<span className='block text-sm font-medium text-slate-700'>
-							Choose city{' '}
+				<div className='mb-3 '></div>
+				<form className='flex flex-row '>
+					<label className='block basis-2/4 mx-2'>
+						<span className='block text-sm font-bold text-slate-700'>
+							What are you looking for ?{' '}
+						</span>
+						<input
+							className=' border border-slate-300 rounded-md  w-full h-14 p-2 '
+							value={product}
+							onChange={handleProduct}
+							placeholder={'Product name'}
+						/>
+					</label>
+					<label className='block basis-2/4'>
+						<span className='block text-sm font-bold text-slate-700'>
+							Choose the city{' '}
 						</span>
 						<select
 							value={city}
 							onChange={handleCity}
-							className='border border-slate-300 bg-white text-slate-700 rounded-md w-full py-4'
+							className='border border-slate-300 bg-white text-slate-700 rounded-md w-full h-14 p-2'
 						>
 							{cities.map((option, index) => (
 								<option key={index} value={option}>
@@ -77,11 +74,11 @@ export default function RecipeReviewCard() {
 							))}
 						</select>
 					</label>
-					<div className='mx-auto mt-5 '>
+					<div className='mx-1 mt-5 '>
 						<button
 							type='submit'
 							onClick={handleSubmit}
-							className='border bg-slate-600 text-white rounded p-3 w-28'
+							className='border bg-slate-600 text-white rounded p-2 h-14  w-28'
 						>
 							Search
 						</button>

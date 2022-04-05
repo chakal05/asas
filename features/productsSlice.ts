@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductType, DataState } from '../interfaces/index';
+
+
 const initialState: DataState = {
 	products: [],
 };
@@ -18,8 +20,20 @@ export const getProductsAsync = createAsyncThunk('data/products', async () => {
 		},
 	});
 
+	// const { db } = await connectToDatabase();
+
+	//   const movies = await db
+	//     .collection("movies")
+	//     .find({})
+	//     .sort({ metacritic: -1 })
+	// 	    .limit(20)
+	// 	    .toArray();
+
+	// 	  res.json(movies);
+
   const result = await response.json();
 	// The value we return becomes the `fulfilled` action payload
+
 	return result;
 });
 

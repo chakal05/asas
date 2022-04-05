@@ -13,10 +13,12 @@ import Footer from '../components/footer';
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<Provider store={store}>
-			<div className='container'>
+			<div className="">
+			<div className='container '>
 				<Header />
 				<Component {...pageProps} />
 				<Footer />
+			</div>
 			</div>
 		</Provider>
 	);

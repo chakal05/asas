@@ -38,7 +38,7 @@ const categories = [
 	{
 		id: 6,
 		icon: faFutbol,
-		title: 'Sport & hobbies',
+		title: 'Hobbies',
 	},
 	{
 		id: 7,
@@ -54,24 +54,27 @@ const categories = [
 
 const Categories = () => {
 	return (
-		<div className='mx-2 mt-12 p-2'>
+		<div className='mx-2 p-2'>
 			<p className=' text-xl font-bold '> Discover our categories </p>
 			<div className=''>
-				<ul className=' grid grid-cols-4  md:flex md:justify-center my-3'>
+				<ul className=' grid grid-cols-4  md:flex md:justify-center my-1'>
 					{categories.map((item) => {
 						return (
-							<li key={item.id} className='m-5 text-center '>
-								<Link href='#' passHref>
-									<div>
-										<a href='#' className='flex flex-col'>
-											<FontAwesomeIcon
-												icon={item.icon}
-												style={{ fontSize: 50, marginBottom: '5px' }}
-											/>
-											{item.title}
-										</a>
-									</div>
-								</Link>
+							<li key={item.id} className='m-5  '>
+								{/**
+								 * When clicked on one of the categories item
+								 * it should trigger an api call
+								 */}
+								<div className='text-center'>
+									<button onClick={() => {}}>
+										<FontAwesomeIcon
+											className='w-full'
+											icon={item.icon}
+											style={{ fontSize: 30, marginBottom: '3px' }}
+										/>
+										{item.title}
+									</button>
+								</div>
 							</li>
 						);
 					})}

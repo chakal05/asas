@@ -7,7 +7,7 @@ export interface ProductType {
 	image: string;
 	city: string;
 	added: string;
-	userId: string;
+	sellerId: string;
 }
 
 export interface DataState {

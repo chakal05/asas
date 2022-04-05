@@ -1,9 +1,9 @@
 const Footer = () => {
 	return (
-		<div className='p-3 mt-9'>
+		<div className='p-3 mt-9 '>
 			<div className='w-full border-t border-slate-300'></div>
 			<div className='grid grid-cols-2'>
-				<div className='py-3 pl-3'>
+				<div className='py-3 pl-3 '>
 					<p className='font-bold text-lg my-1'> Asas </p>
 					<ul>
 						<li> About Asas</li>
