@@ -1,18 +1,27 @@
 import React, { useEffect } from 'react';
-import type { NextPage } from 'next';
-import { GetStaticProps } from 'next';
+import type { NextPage, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
 import { getProductsAsync } from '../features/productsSlice';
 
-const Home: NextPage = () => {
-	// const dispatch = useAppDispatch();
-	// useEffect(() => {
-	// 	dispatch(getProductsAsync());
+import clientPromise from '../lib/mongo';
 
-	// });
+type User = {
+	_id:string;
+	name: string;
+	email: string;
+	password: string;
+};
+
+function Home({
+	users,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+	const dispatch = useAppDispatch();
+	useEffect(() => {
+		dispatch(getProductsAsync());
+	});
 
 	return (
 		<div>
@@ -27,6 +36,12 @@ const Home: NextPage = () => {
 					<p className='text-6xl font-bold  p-5 md:self-center '>
 						{`Buy and sell on Djibouti's safest classified ads `}
 					</p>
+
+					<ul>
+						{users.map((item) => {
+							return <li key={item._id}> {item.name} </li>;
+						})}
+					</ul>
 				</div>
 				<div className='my-12'>
 					<Search />
@@ -37,7 +52,7 @@ const Home: NextPage = () => {
 				<Categories />
 			</div>
 
-			<div className='my-16'>
+			<div className='my-9'>
 				<p className='font-bold text-4xl my-8 text-center'> Our Services </p>
 				<div className='md:flex flex-row '>
 					<div className='border-2 shadow-md mx-5 my-5 p-3 '>
@@ -74,6 +89,21 @@ const Home: NextPage = () => {
 			</div>
 		</div>
 	);
+}
+
+
+export const getServerSideProps = async (context) => {
+	const client = await clientPromise;
+
+	const db = client.db('asas');
+
+	let users :User[]  = await db.collection("users").find({}).toArray();
+	users = JSON.parse(JSON.stringify(users));
+
+
+	return {
+		props: { users },
+	};
 };
 
 export default Home;

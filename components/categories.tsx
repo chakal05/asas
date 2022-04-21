@@ -56,11 +56,10 @@ const Categories = () => {
 	return (
 		<div className='mx-2 p-2'>
 			<p className=' text-xl font-bold '> Discover our categories </p>
-			<div className=''>
-				<ul className=' grid grid-cols-4  md:flex md:justify-center my-1'>
+				<ul className=' grid grid-cols-4  md:flex md:justify-center my-3'>
 					{categories.map((item) => {
 						return (
-							<li key={item.id} className='m-5  '>
+							<li key={item.id} className='mx-1'>
 								{/**
 								 * When clicked on one of the categories item
 								 * it should trigger an api call
@@ -70,7 +69,7 @@ const Categories = () => {
 										<FontAwesomeIcon
 											className='w-full'
 											icon={item.icon}
-											style={{ fontSize: 30, marginBottom: '3px' }}
+											style={{ fontSize: 40, marginBottom: '3px' }}
 										/>
 										{item.title}
 									</button>
@@ -79,8 +78,7 @@ const Categories = () => {
 						);
 					})}
 				</ul>
-			</div>
-			<p className=' text-xl font-thin text-right '>
+				<p className=' text-xl font-thin text-right '>
 				<a href='#' className='underline hover:underline-offset-4'>
 					{' '}
 					Browse all categories{' '}

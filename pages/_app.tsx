@@ -6,6 +6,7 @@ import '../styles/globals.css';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 
+
 import type { AppProps } from 'next/app';
 import Header from '../components/header';
 import Footer from '../components/footer';
