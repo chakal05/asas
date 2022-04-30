@@ -13,28 +13,17 @@ const initialState: DataState = {
 // typically used to make async requests.
 
 export const getProductsAsync = createAsyncThunk('data/products', async () => {
-	const response = await fetch('api/mockData', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+	// const response = await fetch('api/mockData', {
+	// 	method: 'GET',
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 	},
+	// });
 
-	// const { db } = await connectToDatabase();
-
-	//   const movies = await db
-	//     .collection("movies")
-	//     .find({})
-	//     .sort({ metacritic: -1 })
-	// 	    .limit(20)
-	// 	    .toArray();
-
-	// 	  res.json(movies);
-
-  const result = await response.json();
+//   const result = await response.json();
 	// The value we return becomes the `fulfilled` action payload
 
-	return result;
+	//return result;
 });
 
 export const productSlice = createSlice({
@@ -58,9 +47,9 @@ export const productSlice = createSlice({
 			//     .addCase(incrementAsync.pending, (state) => {
 			//       state.status = "loading";
 			//     })
-			.addCase(getProductsAsync.fulfilled, (state, { payload }) => {
-				state.products = [...payload];
-			});
+			// .addCase(getProductsAsync.fulfilled, (state, { payload }) => {
+			// 	state.products = [...payload];
+			// });
 	},
 });
 

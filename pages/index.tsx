@@ -5,11 +5,10 @@ import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
 import { getProductsAsync } from '../features/productsSlice';
-
 import clientPromise from '../lib/mongo';
 
 type User = {
-	_id:string;
+	_id: string;
 	name: string;
 	email: string;
 	password: string;
@@ -31,31 +30,25 @@ function Home({
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<div className=' mt-5'>
-				<div className=' hidden text-center  w-4/5 mx-auto  md:flex'>
-					<p className='text-6xl font-bold  p-5 md:self-center '>
+			<div className=''>
+				<div className='my-9 md:w-4/5 mx-auto'>
+					<p className='text-4xl xl:text-6xl font-bold text-center '>
 						{`Buy and sell on Djibouti's safest classified ads `}
 					</p>
-
-					<ul>
-						{users.map((item) => {
-							return <li key={item._id}> {item.name} </li>;
-						})}
-					</ul>
 				</div>
-				<div className='my-12'>
+				<div className=''>
 					<Search />
 				</div>
 			</div>
 
-			<div className='mt-12'>
+			<div className='my-12'>
 				<Categories />
 			</div>
 
 			<div className='my-9'>
 				<p className='font-bold text-4xl my-8 text-center'> Our Services </p>
 				<div className='md:flex flex-row '>
-					<div className='border-2 shadow-md mx-5 my-5 p-3 '>
+					<div className='border-2 shadow-md p-3 my-5 md:my-0  '>
 						<p className='font-bold text-xl'> Lorem Ipsum </p>
 						<p>
 							{' '}
@@ -65,7 +58,7 @@ function Home({
 							anim id est laborum.{' '}
 						</p>
 					</div>
-					<div className='border-2 shadow-md mx-5 my-5 p-3 '>
+					<div className='border-2 shadow-md  p-3 my-5 md:mx-3 md:my-0'>
 						<p className='font-bold text-xl'> Lorem Ipsum </p>
 						<p>
 							{' '}
@@ -75,7 +68,7 @@ function Home({
 							anim id est laborum.{' '}
 						</p>
 					</div>
-					<div className='border-2 shadow-md mx-5 my-5 p-3 '>
+					<div className='border-2 shadow-md p-3 my-5 md:my-0'>
 						<p className='font-bold text-xl'> Lorem Ipsum </p>
 						<p>
 							{' '}
@@ -91,15 +84,11 @@ function Home({
 	);
 }
 
-
 export const getServerSideProps = async (context) => {
 	const client = await clientPromise;
-
 	const db = client.db('asas');
-
-	let users :User[]  = await db.collection("users").find({}).toArray();
+	let users: User[] = await db.collection('users').find({}).toArray();
 	users = JSON.parse(JSON.stringify(users));
-
 
 	return {
 		props: { users },

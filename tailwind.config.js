@@ -9,11 +9,12 @@ module.exports = {
 			container: {
 				center: true,
 				padding: {
+					DEFAULT: '1rem',
 					sm: '2rem',
-					md: '5rem',
-					lg: '7rem',
-					xl: '9rem',
-					'2xl': '17rem',
+					md: '3rem',
+					lg: '4rem',
+					xl: '5rem',
+					'2xl': '12rem',
 				},
 			},
 			fontFamily: {
@@ -25,7 +26,7 @@ module.exports = {
 			},
 			colors: {
 				primary: 'rgb(6, 6, 61)',
-				secondary:'#F07046'
+				secondary: '#F07046',
 			},
 		},
 	},

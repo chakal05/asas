@@ -11,14 +11,11 @@ export default function RecipeReviewCard() {
 
 	const handleProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setProduct(event.target.value);
-		console.log(product);
 	};
 
 	const handleCity = (event: React.FormEvent<HTMLSelectElement>) => {
 		const el = event.target as HTMLSelectElement;
 		setCity(el.value);
-
-		console.log(city);
 	};
 
 	const handleSubmit = (event: React.FormEvent) => {
@@ -42,13 +39,11 @@ export default function RecipeReviewCard() {
 	];
 
 	return (
-		<div className='bg-slate-200 w-4/5 mx-auto p-1 rounded '>
-
-			<div className='my-5 mx-3 '>
-				<div className='mb-3 '></div>
-				<form className='flex flex-row '>
-					<label className='block basis-2/4 mx-2'>
-						<span className='block text-sm font-bold text-slate-700'>
+		<div className='bg-slate-200  mx-2 p-3 rounded '>
+			<form className='md:flex  '>
+				<div className='my-3 md:basis-2/5 md:mx-0.5'>
+					<label className=' '>
+						<span className='block  font-bold  text-slate-700'>
 							What are you looking for ?{' '}
 						</span>
 						<input
@@ -58,8 +53,10 @@ export default function RecipeReviewCard() {
 							placeholder={'Product name'}
 						/>
 					</label>
-					<label className='block basis-2/4'>
-						<span className='block text-sm font-bold text-slate-700'>
+				</div>
+				<div className='my-3 md:basis-2/5 md:mx-0.5'>
+					<label className=''>
+						<span className='block font-bold text-slate-700'>
 							Choose the city{' '}
 						</span>
 						<select
@@ -74,17 +71,18 @@ export default function RecipeReviewCard() {
 							))}
 						</select>
 					</label>
-					<div className='mx-1 mt-5 '>
-						<button
-							type='submit'
-							onClick={handleSubmit}
-							className='border bg-slate-600 text-white rounded p-2 h-14  w-28'
-						>
-							Search
-						</button>
-					</div>
-				</form>
-			</div>
+				</div>
+
+				<div className='mt-9 md:basis-1/5 md:mx-0.5 '>
+					<button
+						type='submit'
+						onClick={handleSubmit}
+						className='bg-slate-600 text-white rounded-md p-4 w-full'
+					>
+						Search
+					</button>
+				</div>
+			</form>
 		</div>
 	);
 }
