@@ -1,26 +1,30 @@
 import React, { useEffect } from 'react';
 import type { NextPage, InferGetServerSidePropsType } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
-import { getProductsAsync } from '../features/productsSlice';
-import clientPromise from '../lib/mongo';
+import { addProducts } from '../features/productsSlice';
 
-type User = {
-	_id: string;
-	name: string;
-	email: string;
-	password: string;
-};
+import { ProductType } from '../interfaces';
 
-function Home({
-	users,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+// type User = {
+// 	_id: string;
+// 	name: string;
+// 	email: string;
+// 	password: string;
+// };
+
+// {
+// 	products ,
+// }: InferGetServerSidePropsType<typeof getServerSideProps>
+
+function Home() {
 	const dispatch = useAppDispatch();
-	useEffect(() => {
-		dispatch(getProductsAsync());
-	});
+	const router = useRouter();
+
+	useEffect(() => {});
 
 	return (
 		<div>
@@ -37,9 +41,21 @@ function Home({
 					</p>
 				</div>
 				<div className=''>
-					<Search />
+					<Search
+						submit={(city) => {
+							//	dispatch(addProducts());
+							router.push({
+								pathname: '/products/',
+								query: {
+									city,
+								},
+							});
+						}}
+					/>
 				</div>
 			</div>
+
+			
 
 			<div className='my-12'>
 				<Categories />
@@ -84,15 +100,15 @@ function Home({
 	);
 }
 
-export const getServerSideProps = async (context) => {
-	const client = await clientPromise;
-	const db = client.db('asas');
-	let users: User[] = await db.collection('users').find({}).toArray();
-	users = JSON.parse(JSON.stringify(users));
+// export const getServerSideProps = async (context) => {
+// 	const client = await clientPromise;
+// 	const db = client.db('asas');
+// 	let products: ProductType[] = await db.collection('users').find({}).toArray();
+// 	products = JSON.parse(JSON.stringify(products));
 
-	return {
-		props: { users },
-	};
-};
+// 	return {
+// 		props: { products },
+// 	};
+// };
 
 export default Home;

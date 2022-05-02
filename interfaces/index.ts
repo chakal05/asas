@@ -1,5 +1,5 @@
 export interface ProductType {
-	//id: number;
+	_id: string;
 	title: string;
 	price: number;
 	description: string;
@@ -17,7 +17,7 @@ export interface DataState {
 
 export interface FilterState {
 	filters: {
-		id: number;
+		_id: string;
 		title: string;
 		price: number;
 		category: string;

@@ -1,13 +1,16 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
+
 import { useAppDispatch } from '../redux/hooks';
 import { filterByCity, filterByText } from '../features/filtersSlice';
 
-export default function RecipeReviewCard() {
+type Props = {
+	submit: (city: string) => void;
+};
+
+const SearchBox: React.FC<Props> = ({ submit }) => {
 	const dispatch = useAppDispatch();
 	const [city, setCity] = React.useState('All over Djibouti');
 	const [product, setProduct] = React.useState('');
-	const router = useRouter();
 
 	const handleProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setProduct(event.target.value);
@@ -18,14 +21,10 @@ export default function RecipeReviewCard() {
 		setCity(el.value);
 	};
 
-	const handleSubmit = (event: React.FormEvent) => {
-		event.preventDefault();
+	const handleSubmit = () => {
+	//	event.preventDefault();
 		dispatch(filterByCity(city));
 		dispatch(filterByText(product));
-
-		router.push({
-			pathname: '/products/productsList',
-		});
 	};
 
 	const cities = [
@@ -40,8 +39,8 @@ export default function RecipeReviewCard() {
 
 	return (
 		<div className='bg-slate-200  mx-2 p-3 rounded '>
-			<form className='md:flex  '>
-				<div className='my-3 md:basis-2/5 md:mx-0.5'>
+			<div className='sm:flex'>
+				<div className='my-3 sm:basis-2/5 sm:mx-0.5'>
 					<label className=' '>
 						<span className='block  font-bold  text-slate-700'>
 							What are you looking for ?{' '}
@@ -54,7 +53,7 @@ export default function RecipeReviewCard() {
 						/>
 					</label>
 				</div>
-				<div className='my-3 md:basis-2/5 md:mx-0.5'>
+				<div className='my-3 sm:basis-2/5 sm:mx-0.5'>
 					<label className=''>
 						<span className='block font-bold text-slate-700'>
 							Choose the city{' '}
@@ -73,16 +72,21 @@ export default function RecipeReviewCard() {
 					</label>
 				</div>
 
-				<div className='mt-9 md:basis-1/5 md:mx-0.5 '>
+				<div className='mt-9 sm:basis-1/5 sm:mx-0.5 '>
 					<button
-						type='submit'
-						onClick={handleSubmit}
+						type='button'
+						onClick={() => {
+							handleSubmit();
+							submit(city);
+						}}
 						className='bg-slate-600 text-white rounded-md p-4 w-full'
 					>
 						Search
 					</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	);
-}
+};
+
+export default SearchBox;

@@ -51,7 +51,7 @@ export default function Header() {
 					<Link href='/'>
 						<a className='flex items-center'>
 							<span className='self-center text-xl font-semibold whitespace-nowrap '>
-								Kasal
+								kasal
 							</span>
 						</a>
 					</Link>

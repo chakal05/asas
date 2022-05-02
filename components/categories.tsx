@@ -67,9 +67,8 @@ const Categories = () => {
 								<div className='text-center'>
 									<button onClick={() => {}}>
 										<FontAwesomeIcon
-											className='w-full'
+											className='w-full text-4xl mb-2 text-slate-600'
 											icon={item.icon}
-											style={{ fontSize: 40, marginBottom: '3px' }}
 										/>
 										{item.title}
 									</button>

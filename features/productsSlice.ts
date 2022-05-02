@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductType, DataState } from '../interfaces/index';
-
+import clientPromise from '../lib/mongo';
 
 const initialState: DataState = {
 	products: [],
@@ -12,7 +12,7 @@ const initialState: DataState = {
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
 
-export const getProductsAsync = createAsyncThunk('data/products', async () => {
+//export const getProductsAsync = createAsyncThunk('data/products', async () => {
 	// const response = await fetch('api/mockData', {
 	// 	method: 'GET',
 	// 	headers: {
@@ -24,14 +24,14 @@ export const getProductsAsync = createAsyncThunk('data/products', async () => {
 	// The value we return becomes the `fulfilled` action payload
 
 	//return result;
-});
+//});
 
 export const productSlice = createSlice({
 	name: 'getProducts',
 	initialState,
 	// The `reducers` field lets us define reducers and generate associated actions
 	reducers: {
-		increment: (state, { payload }: PayloadAction<ProductType[]>) => {
+		addProducts: (state, { payload }: PayloadAction<ProductType[]>) => {
 			// Redux Toolkit allows us to write "mutating" logic in reducers. It
 			// doesn't actually mutate the state because it uses the Immer library,
 			// which detects changes to a "draft state" and produces a brand new
@@ -54,7 +54,7 @@ export const productSlice = createSlice({
 });
 
 export const {
-	increment,
+	addProducts,
 } = productSlice.actions;
 
 // The function below is called a selector and allows us to select a value from

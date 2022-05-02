@@ -2,7 +2,7 @@ import { ProductType } from '../../interfaces';
 // const { connectToDatabase } = require('../../db/mongo');
 // const ObjectId = require('mongodb').ObjectId;
 
-const fakeData: ProductType[] = [
+const fakeData = [
 	{
 		category: "men's clothing",
 		description:
