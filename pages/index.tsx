@@ -6,25 +6,16 @@ import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
 import { addProducts } from '../features/productsSlice';
-
 import { ProductType } from '../interfaces';
-
-// type User = {
-// 	_id: string;
-// 	name: string;
-// 	email: string;
-// 	password: string;
-// };
+import middleware from '../lib/mongo';
 
 // {
-// 	products ,
+// 	products,
 // }: InferGetServerSidePropsType<typeof getServerSideProps>
 
 function Home() {
 	const dispatch = useAppDispatch();
 	const router = useRouter();
-
-	useEffect(() => {});
 
 	return (
 		<div>
@@ -54,8 +45,6 @@ function Home() {
 					/>
 				</div>
 			</div>
-
-			
 
 			<div className='my-12'>
 				<Categories />
@@ -101,11 +90,10 @@ function Home() {
 }
 
 // export const getServerSideProps = async (context) => {
-// 	const client = await clientPromise;
+// 	const client = await middleware;
 // 	const db = client.db('asas');
-// 	let products: ProductType[] = await db.collection('users').find({}).toArray();
+// 	let products: ProductType[] = await db.collection('products').insert(fakeData);
 // 	products = JSON.parse(JSON.stringify(products));
-
 // 	return {
 // 		props: { products },
 // 	};

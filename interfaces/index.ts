@@ -4,7 +4,8 @@ export interface ProductType {
 	price: number;
 	description: string;
 	category: string;
-	image: string;
+	images: string[];
+	stock:number;
 	city: string;
 	added: string;
 	sellerId: string;

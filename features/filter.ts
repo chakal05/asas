@@ -1,7 +1,7 @@
 import { FilterState, ProductType } from '../interfaces';
 
 const filter = (products: ProductType[], { filters }: FilterState) => {
-	const { title, city, price, category, added, id } = filters;
+	const { title, city, price, category, added, _id } = filters;
 	return products.filter(
 		(item: {
 			title: string;

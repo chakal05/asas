@@ -12,7 +12,7 @@
 // export default nextConfig;
 
 module.exports = {
-  images: {
-    domains: ['fakestoreapi.com'],
-  },
-}
+	images: {
+		domains: ['fakestoreapi.com', 'ecx.images-amazon.com'],
+	},
+};

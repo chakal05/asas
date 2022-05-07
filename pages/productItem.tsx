@@ -1,77 +1,14 @@
-import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import type { InferGetServerSidePropsType, NextPage } from 'next';
 import styled from 'styled-components';
-
-const mockList = [
-	{
-		category: "women's clothing",
-		description:
-			'95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
-		image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
-		city: 'Djibouti City',
-		added: '2022-01-17',
-		sellerId: '62470a417e53beb38dae2af6',
-		price: 12.99,
-		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
-	},
-	{
-		category: "women's clothing",
-		description:
-			'95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
-		image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
-		city: 'Djibouti City',
-		added: '2022-01-17',
-		sellerId: '62470a417e53beb38dae2af6',
-		price: 12.99,
-		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
-	},
-	{
-		category: "women's clothing",
-		description:
-			'95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
-		image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
-		city: 'Djibouti City',
-		added: '2022-01-17',
-		sellerId: '62470a417e53beb38dae2af6',
-		price: 12.99,
-		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
-	},
-	{
-		category: "women's clothing",
-		description:
-			'95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
-		image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
-		city: 'Djibouti City',
-		added: '2022-01-17',
-		sellerId: '62470a417e53beb38dae2af6',
-		price: 12.99,
-		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
-	},
-	{
-		category: "women's clothing",
-		description:
-			'95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
-		image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
-		city: 'Djibouti City',
-		added: '2022-01-17',
-		sellerId: '62470a417e53beb38dae2af6',
-		price: 12.99,
-		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
-	},
-	{
-		category: "women's clothing",
-		description:
-			'95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
-		image: 'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg',
-		city: 'Djibouti City',
-		added: '2022-01-17',
-		sellerId: '62470a417e53beb38dae2af6',
-		price: 12.99,
-		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
-	},
-];
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+	faCircleChevronLeft,
+	faCircleChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+import Swipe from 'react-easy-swipe';
 
 const ImageWrap = styled.span`
 	box-sizing: content-box;
@@ -79,9 +16,7 @@ const ImageWrap = styled.span`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
-	& > span {
-	}
+	width: '100%';
 `;
 
 const Product = ({
@@ -89,8 +24,17 @@ const Product = ({
 	sellerInfo,
 	sameCategorie,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const { title, description, image, price } = product;
+	const { title, description, images, price } = product;
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const nextSlide = () => {
+		let newSlide = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
+		setCurrentSlide(newSlide);
+	};
 
+	const prevSlide = () => {
+		let newSlide = currentSlide === 0 ? images.length - 1 : currentSlide - 1;
+		setCurrentSlide(newSlide);
+	};
 	return (
 		<div>
 			<Head>
@@ -100,14 +44,164 @@ const Product = ({
 			</Head>
 
 			<div className='md:flex'>
-				<div className=' p-1 mx-1 mt-1 md:basis-4/6 '>
-					<div className='p-5 w-4/5 mx-auto text-center '>
-						<Image
-							src={image as any}
-							width='300px'
-							height='300px'
-							alt='title'
-						/>
+				<div className=' mx-1 mt-1 md:basis-4/6 '>
+					{/* <div className=' h-96 max-h-96 max-w-xl w-full overflow-hidden flex relative '>
+						<button
+							onClick={prevSlide}
+							className='absolute left-3 text-3xl inset-y-1/2 cursor-pointer'
+						>
+							<FontAwesomeIcon icon={faCircleChevronLeft} />
+						</button>
+						<Swipe onSwipeLeft={nextSlide} onSwipeRight={prevSlide}>
+							{images.map((img, index) => {
+								return (
+									<div
+										key={index}
+										className={index === currentSlide ? 'block' : 'hidden'}
+									>
+										<Image layout='fill' src={img} alt='' />
+									</div>
+								);
+							})}
+						</Swipe>
+						<div className='absolute w-full flex justify-center bottom-0'>
+							{images.map((element, index) => {
+								return (
+									<div
+										className={
+											index === currentSlide
+												? 'h-2 w-2 bg-blue-700 rounded-full mx-2 mb-2 cursor-pointer'
+												: 'h-2 w-2 bg-white rounded-full mx-2 mb-2 cursor-pointer'
+										}
+										key={index}
+										onClick={() => {
+											setCurrentSlide(index);
+											let newSlide =
+												currentSlide === images.length - 1
+													? 0
+													: currentSlide + 1;
+											setCurrentSlide(newSlide);
+										}}
+									></div>
+								);
+							})}
+						</div>
+						<button
+							onClick={nextSlide}
+							className='absolute right-0 text-3xl inset-y-1/2 cursor-pointer'
+						>
+							<FontAwesomeIcon icon={faCircleChevronRight} />
+						</button>
+					</div> */}
+
+					<div
+						id='default-carousel'
+						className='relative'
+						//data-carousel='static'
+					>
+						{/* <!-- Carousel wrapper --> */}
+						<div className='overflow-hidden  relative h-64 rounded-lg sm:h-72  xl:h-80 2xl:h-96'>
+							{/* <!-- Item 1 --> */}
+							<div
+								className=' duration-700 ease-in-out'
+								//	data-carousel-item
+							>
+								{images.map((img, index) => {
+									return (
+										<div
+											key={index}
+											className={index === currentSlide ? 'block ' : 'hidden'}
+										>
+											<Image layout='fill' objectFit='fill' src={img} alt='' />
+										</div>
+
+										//w-3/5 h-56 sm:h-64  xl:h-80 2xl:h-96
+
+										// <img
+										// 	src={images[0]}
+										// 	key={index}
+										// 	className='block  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-56 sm:h-64 sm:w-64 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96'
+										// />
+									);
+								})}
+
+								{/* <img
+									src={images[0]}
+									className='block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2'
+									alt='...'
+								/> */}
+							</div>
+						</div>
+						{/* <!-- Slider indicators --> */}
+						<div className='flex absolute  bottom-3 left-1/2 z-30 space-x-3 -translate-x-1/2'>
+							<p className='bg-slate-500 text-white py-1 px-3 rounded'>
+								{' '}
+								{currentSlide + 1} av{' '}
+								{images.length}{' '}
+							</p>
+
+							{/* <button
+								type='button'
+								className='w-3 h-3 rounded-full'
+								aria-current='false'
+								aria-label='Slide 2'
+								data-carousel-slide-to='1'
+							></button>
+							<button
+								type='button'
+								className='w-3 h-3 rounded-full'
+								aria-current='false'
+								aria-label='Slide 3'
+								data-carousel-slide-to='2'
+							></button> */}
+						</div>
+						{/* <!-- Slider controls --> */}
+						<button
+							type='button'
+							className='flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none'
+							onClick={prevSlide}
+						>
+							<span className='inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none'>
+								<svg
+									className='w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+									xmlns='http://www.w3.org/2000/svg'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth='2'
+										d='M15 19l-7-7 7-7'
+									></path>
+								</svg>
+								<span className='hidden'>Previous</span>
+							</span>
+						</button>
+						<button
+							type='button'
+							className='flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none'
+							onClick={nextSlide}
+						>
+							<span className='inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none'>
+								<svg
+									className='w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800'
+									fill='none'
+									stroke='currentColor'
+									viewBox='0 0 24 24'
+									xmlns='http://www.w3.org/2000/svg'
+								>
+									<path
+										strokeLinecap='round'
+										strokeLinejoin='round'
+										strokeWidth='2'
+										d='M9 5l7 7-7 7'
+									></path>
+								</svg>
+								<span className='hidden'>Next</span>
+							</span>
+						</button>
 					</div>
 
 					<div className='mt-7'>
@@ -194,12 +288,17 @@ const Product = ({
 			</div>
 			<div className='bg-slate-50 mt-12 '>
 				<p className='text-2xl p-3 font-bold'> Others also looked at </p>
-				<ul className='grid grid-cols-2 gap-4 p-3 '>
+				<ul className='grid grid-cols-2 gap-4 p-3 md:grid-cols-3 '>
 					{sameCategorie.map((item, index) => {
 						return (
 							<li key={index} className=' bg-white shadow-lg rounded-lg'>
 								<ImageWrap>
-									<Image src={item.image} width={150} height={150} alt='ds' />
+									<Image
+										src={item.images[0]}
+										width={150}
+										height={150}
+										alt='ds'
+									/>
 								</ImageWrap>
 								<div className='p-1'>
 									<p className='text-slate-600'> {item.city} </p>

@@ -1,7 +1,5 @@
 import Link from 'next/link';
-// Import the FontAwesomeIcon component
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import the icons you need
 import {
 	faCar,
 	faHome,

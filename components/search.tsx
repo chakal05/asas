@@ -38,9 +38,9 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 	];
 
 	return (
-		<div className='bg-slate-200  mx-2 p-3 rounded '>
+		<div className='bg-slate-200 sm:p-2 mx-2 p-3 rounded '>
 			<div className='sm:flex'>
-				<div className='my-3 sm:basis-2/5 sm:mx-0.5'>
+				<div className='sm:my-1 sm:basis-2/5 sm:mx-0.5'>
 					<label className=' '>
 						<span className='block  font-bold  text-slate-700'>
 							What are you looking for ?{' '}
@@ -53,7 +53,7 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 						/>
 					</label>
 				</div>
-				<div className='my-3 sm:basis-2/5 sm:mx-0.5'>
+				<div className='my-3 sm:my-1 sm:basis-2/5 sm:mx-0.5'>
 					<label className=''>
 						<span className='block font-bold text-slate-700'>
 							Choose the city{' '}
@@ -72,7 +72,7 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 					</label>
 				</div>
 
-				<div className='mt-9 sm:basis-1/5 sm:mx-0.5 '>
+				<div className='mt-6 mb-3 sm:mt-7 sm:mb-1  sm:basis-1/5 sm:mx-0.5 '>
 					<button
 						type='button'
 						onClick={() => {

@@ -73,12 +73,12 @@ const Posts = ({
 							>
 								<a>
 									<div className='border-2 my-2 py-1 rounded shadow-lg hover:bg-slate-50  '>
-										
+
 										<div className='flex py-1 '>
 											<div className='basis-1/5 '>
 												<ImageWrap>
 													<Image
-														src={item.image}
+														src={item.images[0]}
 														alt='sr'
 														height={120}
 														width={130}
@@ -121,7 +121,7 @@ const Posts = ({
 									<div className='flex flex-col  justify-center items-center '>
 										<ImageWrap>
 											<Image
-												src={product.image}
+												src={product.images[0]}
 												alt='sr'
 												height={100}
 												width={100}
