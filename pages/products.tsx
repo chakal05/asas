@@ -9,7 +9,11 @@ import { RootState } from '../redux/store';
 import { ProductType } from '../interfaces/index';
 import filter from '../store/filter';
 import Categories from '../components/categories';
-import { getByCity, getByCategory } from '../utils/productsApiCalls';
+import {
+	getByCity,
+	getByCategory,
+	getPromoted,
+} from '../utils/productsApiCalls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCar, faFaceSurprise } from '@fortawesome/free-solid-svg-icons';
 
@@ -170,10 +174,7 @@ export const getServerSideProps = async (context) => {
 		products = await getByCategory(category);
 	}
 
-	const getPromo = await fetch(
-		`http://localhost:3000/api/products/?promoted=${true}`
-	);
-	const promoted = await getPromo.json();
+	const promoted = await getPromoted();
 	return {
 		props: { products, promoted },
 	};
