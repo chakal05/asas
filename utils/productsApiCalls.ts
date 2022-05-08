@@ -1,7 +1,10 @@
 let dev;
 
-if (process.env.NODE_ENV === 'development') dev = process.env.DEV_URL;
-else dev = process.env.PROD_URL;
+if (process.env.NODE_ENV === 'development') {
+	dev = process.env.NEXT_PUBLIC_DEV_URL;
+} else {
+	dev = process.env.NEXT_PUBLIC_PROD_URL;
+}
 
 const getByCity = async (city) => {
 	const res = await fetch(`${dev}/api/products/?city=${city}`);

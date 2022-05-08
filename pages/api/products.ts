@@ -7,14 +7,18 @@ const products = async (req, res) => {
 		const { city, id, sellerId, category, promoted } = req.query;
 		const db = client.db('asas');
 		let result;
-		if (city === 'All over Djibouti') {
-			result = await db.collection('products').find({}).toArray();
-		} else {
-			result = await db.collection('products').find({ city }).toArray();
+		if (city) {
+			if (city === 'All over Djibouti') {
+				result = await db.collection('products').find({}).toArray();
+			} else {
+				result = await db.collection('products').find({ city }).toArray();
+			}
 		}
 
 		if (id) {
-			result = await db.collection('products').findOne({ _id: new ObjectId(id) });
+			result = await db
+				.collection('products')
+				.findOne({ _id: new ObjectId(id) });
 		}
 
 		if (sellerId) {
@@ -31,7 +35,7 @@ const products = async (req, res) => {
 				.find({ promoted: true })
 				.toArray();
 
-			result = dbRes.slice(0,4)
+			result = dbRes.slice(0, 4);
 		}
 
 		res.json(result);
