@@ -5,7 +5,6 @@ import Head from 'next/head';
 import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
-import middleware from '../lib/mongo'
 
 // {
 // 	products,
@@ -44,15 +43,25 @@ function Home() {
 			</div>
 
 			<div className='my-8'>
-				<Categories />
+				<Categories
+					submitCategory={(category) => {
+						router.push({
+							pathname: '/products/',
+							query: { category },
+						});
+					}}
+				/>
 			</div>
 
 			<div className='my-9'>
-				<p className='font-bold text-4xl my-8 text-center text-sky-900' > Our Services </p>
+				<p className='font-bold text-4xl my-8 text-center text-sky-900'>
+					{' '}
+					Our Services{' '}
+				</p>
 				<div className='md:flex flex-row px-3 md:px-0 '>
 					<div className='bg-white  shadow-md p-3 my-5 md:my-0  '>
 						<p className='font-bold text-xl text-sky-900'> Lorem Ipsum </p>
-						<p className='text-slate-700'  >
+						<p className='text-slate-700'>
 							{' '}
 							Duis aute irure dolor in reprehenderit in voluptate velit esse
 							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -85,7 +94,6 @@ function Home() {
 		</div>
 	);
 }
-
 
 // export const getServerSideProps = async (context) => {
 // 	const client = await middleware;

@@ -10,52 +10,45 @@ import {
 	faLayerGroup,
 	faShirt,
 } from '@fortawesome/free-solid-svg-icons';
+import { getByCategory } from '../utils/productsApiCalls';
 
 const categories = [
 	{
 		icon: faCar,
 		title: 'Car',
-		path: '',
 	},
 	{
 		icon: faBed,
 		title: 'Furniture',
-		path: '',
 	},
 
 	{
 		icon: faShirt,
 		title: 'Clothes',
-		path: '',
 	},
 	{
 		icon: faMobilePhone,
 		title: 'Electronics',
-		path: '',
 	},
 	{
 		icon: faFutbol,
 		title: 'Hobbies',
-		path: '',
 	},
 	{
 		icon: faBriefcase,
 		title: 'Jobs',
-		path: '',
 	},
 	{
 		icon: faHome,
 		title: 'Homes',
-		path: '',
-	},
-	{
-		icon: faLayerGroup,
-		title: 'All categories',
-		path: '/categories',
 	},
 ];
 
-const Categories = () => {
+type Props = {
+	submitCategory: (title: string) => void;
+};
+
+const Categories: React.FC<Props> = ({ submitCategory }) => {
 	return (
 		<div className='mx-2 p-2'>
 			<div className=''>
@@ -64,32 +57,37 @@ const Categories = () => {
 					Discover our categories{' '}
 				</p>
 			</div>
-			<ul className=' grid grid-cols-4  md:flex md:justify-center mt-5'>
+			<ul className='grid grid-cols-4 gap-4 my-3 '>
 				{categories.map((item, index) => {
 					return (
-						<li key={index} className='m-1'>
+						<li key={index} className='text-sm'>
 							<div className='text-center text-slate-700 '>
-								<Link
-									href={
-										item.title === 'All categories'
-											? item.path
-											: `/products/?category=${item.title.toLowerCase()}`
-									}
-									passHref
-
+								<button
+									onClick={() =>submitCategory(item.title.toLowerCase())}
 								>
-									<a>
-										<FontAwesomeIcon
-											className='w-full text-4xl mb-2 text-sky-900'
-											icon={item.icon}
-										/>
-										{item.title}
-									</a>
-								</Link>
+									<FontAwesomeIcon
+										className='w-full text-4xl mb-2 text-sky-900'
+										icon={item.icon}
+									/>
+									{item.title}
+								</button>
 							</div>
 						</li>
 					);
 				})}
+				<li className='m-1'>
+					<div className='text-center text-slate-700 '>
+						<Link href={'/categories'}>
+							<a>
+								<FontAwesomeIcon
+									className='w-full text-4xl mb-2 text-sky-900'
+									icon={faLayerGroup}
+								/>
+								{'All category'}
+							</a>
+						</Link>
+					</div>
+				</li>
 			</ul>
 		</div>
 	);

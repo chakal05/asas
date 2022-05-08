@@ -10,6 +10,8 @@ import { ProductType } from '../interfaces/index';
 import filter from '../store/filter';
 import Categories from '../components/categories';
 import { getByCity, getByCategory } from '../utils/productsApiCalls';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCar, faFaceSurprise } from '@fortawesome/free-solid-svg-icons';
 
 const Posts = ({
 	products,
@@ -35,7 +37,12 @@ const Posts = ({
 				/>
 			</div>
 			<div className=''>
-				<Categories />
+				<Categories
+					submitCategory={async (category) => {
+						const products = await getByCategory(category);
+						setData(products);
+					}}
+				/>
 			</div>
 
 			<div className='md:flex'>
@@ -85,10 +92,29 @@ const Posts = ({
 							</Link>
 						);
 					})}
+					{!filtered[0] && (
+						<div className='text-center w-4/5 mx-auto px-2 py-6 bg-white shadow-lg rounded-lg border-2 mt-20 mb-40'>
+							<div className=''>
+								<div>
+									<FontAwesomeIcon
+										className='text-7xl text-sky-900'
+										icon={faFaceSurprise}
+									/>
+									<p className='text-5xl font-bold my-6 text-sky-900'>
+										No match Found{' '}
+									</p>
+									<p className='text-2xl text-slate-700'>
+										There are no results that match your current filters. Try
+										removing some of them to get better results.
+									</p>
+								</div>
+							</div>
+						</div>
+					)}
 				</div>
 
 				<div className='hidden md:block md:basis-1/5 md:ml-3 p-2'>
-					<ul className='bg-white divide-y rounded shadow-lg '>
+					<ul className='bg-white divide-y rounded shadow-lg border-2 '>
 						<p className='text-center font-bold text-xl mb-3 text-sky-900'>
 							{' '}
 							Promoted{' '}

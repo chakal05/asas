@@ -36,7 +36,7 @@ const Product = ({
 			<div className='md:flex'>
 				<div className='bg-white  shadow-lg rounded-lg border-2 mx-1 mt-1 md:basis-4/6 '>
 					<div id='default-carousel' className='relative'>
-						<div className='overflow-hidden relative rounded-lg  h-[16rem] xs:w-9/12  sm:h-72 xl:h-80 2xl:h-96 mx-auto'>
+						<div className='overflow-hidden relative rounded-lg  h-[16rem] w-10/12 sm:w-9/12  sm:h-72 xl:h-80 2xl:h-96 mx-auto'>
 							<div className=' duration-700 ease-in-out '>
 								{images.map((img, index) => {
 									return (
@@ -188,7 +188,7 @@ const Product = ({
 						return (
 							<li
 								key={index}
-								className=' bg-white p-3 shadow-lg rounded-lg border-2 w-9/12 md:mx-3 my-3 mx-auto'
+								className=' bg-white p-3 shadow-lg rounded-lg border-2  md:mx-3 my-3 mx-2'
 							>
 								<Link
 									href={{
@@ -200,7 +200,7 @@ const Product = ({
 									passHref
 								>
 									<a>
-										<div className='relative w-36 h-36 md:w-40 md:h-40  mx-auto '>
+										<div className='relative w-48 h-44 md:w-40 md:h-40  mx-auto '>
 											<Image
 												src={item.images[0]}
 												layout='fill'
@@ -242,8 +242,10 @@ export const getServerSideProps = async (context) => {
 	const productCategorie = await fetch(
 		`http://localhost:3000/api/products/?category=${category}`
 	);
-	const sameCategorie = await productCategorie.json();
 
+	let categorie = await productCategorie.json();
+	const sameCategorie = categorie.slice(0,4);
+	let b = [].slice(0,4)
 	return {
 		props: { product, sellerInfo, sameCategorie },
 	};

@@ -26,12 +26,12 @@ const products = async (req, res) => {
 		}
 
 		if (promoted) {
-			let b = await db
+			let dbRes = await db
 				.collection('products')
 				.find({ promoted: true })
 				.toArray();
 
-			result = b.slice(0,4)
+			result = dbRes.slice(0,4)
 		}
 
 		res.json(result);
