@@ -3,7 +3,7 @@ module.exports = {
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
 		'./components/**/*.{js,ts,jsx,tsx}',
-		
+
 	],
 	theme: {
 		extend: {
@@ -24,10 +24,6 @@ module.exports = {
 				mono: ['roboto'],
 				display: ['roboto'],
 				body: ['"roboto"'],
-			},
-			colors: {
-				primary: 'rgb(6, 6, 61)',
-				secondary: '#F07046',
 			},
 		},
 	},

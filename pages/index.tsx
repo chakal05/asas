@@ -5,9 +5,7 @@ import Head from 'next/head';
 import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
-import { addProducts } from '../features/productsSlice';
-import { ProductType } from '../interfaces';
-import middleware from '../lib/mongo';
+import middleware from '../lib/mongo'
 
 // {
 // 	products,
@@ -27,14 +25,13 @@ function Home() {
 
 			<div className=''>
 				<div className='my-9 md:w-4/5 mx-auto'>
-					<p className='text-4xl xl:text-6xl font-bold text-center '>
+					<p className='text-4xl xl:text-6xl text-sky-900 font-bold text-center '>
 						{`Buy and sell on Djibouti's safest classified ads `}
 					</p>
 				</div>
 				<div className=''>
 					<Search
 						submit={(city) => {
-							//	dispatch(addProducts());
 							router.push({
 								pathname: '/products/',
 								query: {
@@ -46,16 +43,16 @@ function Home() {
 				</div>
 			</div>
 
-			<div className='my-12'>
+			<div className='my-8'>
 				<Categories />
 			</div>
 
 			<div className='my-9'>
-				<p className='font-bold text-4xl my-8 text-center'> Our Services </p>
-				<div className='md:flex flex-row '>
-					<div className='border-2 shadow-md p-3 my-5 md:my-0  '>
-						<p className='font-bold text-xl'> Lorem Ipsum </p>
-						<p>
+				<p className='font-bold text-4xl my-8 text-center text-sky-900' > Our Services </p>
+				<div className='md:flex flex-row px-3 md:px-0 '>
+					<div className='bg-white  shadow-md p-3 my-5 md:my-0  '>
+						<p className='font-bold text-xl text-sky-900'> Lorem Ipsum </p>
+						<p className='text-slate-700'  >
 							{' '}
 							Duis aute irure dolor in reprehenderit in voluptate velit esse
 							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -63,9 +60,9 @@ function Home() {
 							anim id est laborum.{' '}
 						</p>
 					</div>
-					<div className='border-2 shadow-md  p-3 my-5 md:mx-3 md:my-0'>
-						<p className='font-bold text-xl'> Lorem Ipsum </p>
-						<p>
+					<div className='bg-white shadow-md  p-3 my-5 md:mx-3 md:my-0'>
+						<p className='font-bold text-xl text-sky-900'> Lorem Ipsum </p>
+						<p className='text-slate-700'>
 							{' '}
 							Duis aute irure dolor in reprehenderit in voluptate velit esse
 							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -73,9 +70,9 @@ function Home() {
 							anim id est laborum.{' '}
 						</p>
 					</div>
-					<div className='border-2 shadow-md p-3 my-5 md:my-0'>
-						<p className='font-bold text-xl'> Lorem Ipsum </p>
-						<p>
+					<div className='bg-white shadow-md p-3 my-5 md:my-0'>
+						<p className='font-bold text-xl text-sky-900'> Lorem Ipsum </p>
+						<p className='text-slate-700'>
 							{' '}
 							Duis aute irure dolor in reprehenderit in voluptate velit esse
 							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -89,10 +86,11 @@ function Home() {
 	);
 }
 
+
 // export const getServerSideProps = async (context) => {
 // 	const client = await middleware;
 // 	const db = client.db('asas');
-// 	let products: ProductType[] = await db.collection('products').insert(fakeData);
+// 	let products = await db.collection('products').insert(fakeData);
 // 	products = JSON.parse(JSON.stringify(products));
 // 	return {
 // 		props: { products },

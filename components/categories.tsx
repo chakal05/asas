@@ -7,80 +7,90 @@ import {
 	faMobilePhone,
 	faFutbol,
 	faBed,
-	//	faDrum,
+	faLayerGroup,
 	faShirt,
 } from '@fortawesome/free-solid-svg-icons';
 
 const categories = [
 	{
-		id: 1,
 		icon: faCar,
 		title: 'Car',
+		path: '',
 	},
 	{
-		id: 2,
 		icon: faBed,
 		title: 'Furniture',
+		path: '',
 	},
 
 	{
-		id: 4,
 		icon: faShirt,
 		title: 'Clothes',
+		path: '',
 	},
 	{
-		id: 5,
 		icon: faMobilePhone,
 		title: 'Electronics',
+		path: '',
 	},
 	{
-		id: 6,
 		icon: faFutbol,
 		title: 'Hobbies',
+		path: '',
 	},
 	{
-		id: 7,
 		icon: faBriefcase,
 		title: 'Jobs',
+		path: '',
 	},
 	{
-		id: 3,
 		icon: faHome,
 		title: 'Homes',
+		path: '',
+	},
+	{
+		icon: faLayerGroup,
+		title: 'All categories',
+		path: '/categories',
 	},
 ];
 
 const Categories = () => {
 	return (
 		<div className='mx-2 p-2'>
-			<p className=' text-xl mb-5 font-bold '> Discover our categories </p>
-				<ul className=' grid grid-cols-4  md:flex md:justify-center my-3'>
-					{categories.map((item) => {
-						return (
-							<li key={item.id} className='m-1'>
-								{/**
-								 * When clicked on one of the categories item
-								 * it should trigger an api call
-								 */}
-								<div className='text-center'>
-									<button onClick={() => {}}>
+			<div className=''>
+				<p className=' text-xl font-bold text-sky-900'>
+					{' '}
+					Discover our categories{' '}
+				</p>
+			</div>
+			<ul className=' grid grid-cols-4  md:flex md:justify-center mt-5'>
+				{categories.map((item, index) => {
+					return (
+						<li key={index} className='m-1'>
+							<div className='text-center text-slate-700 '>
+								<Link
+									href={
+										item.title === 'All categories'
+											? item.path
+											: `/products/?category=${item.title.toLowerCase()}`
+									}
+									passHref
+
+								>
+									<a>
 										<FontAwesomeIcon
-											className='w-full text-4xl mb-2 text-slate-600'
+											className='w-full text-4xl mb-2 text-sky-900'
 											icon={item.icon}
 										/>
 										{item.title}
-									</button>
-								</div>
-							</li>
-						);
-					})}
-				</ul>
-				<p className=' text-xl font-thin text-right '>
-				<a href='#' className='underline hover:underline-offset-4'>
-					{' '}
-					Browse all categories{' '}
-				</a>
-			</p>
+									</a>
+								</Link>
+							</div>
+						</li>
+					);
+				})}
+			</ul>
 		</div>
 	);
 };

@@ -4,7 +4,7 @@ import { ProductType } from '../../interfaces';
 
 const fakeData = [
 	{
-		category: "men's clothing",
+		category: "clothes",
 		description:
 			'Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday',
 		images: [
@@ -17,10 +17,11 @@ const fakeData = [
 		sellerId: '624706557e53beb38dae2af3',
 		price: 3030,
 		stock: 1,
+		promoted: false,
 		title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
 	},
 	{
-		category: "men's clothing",
+		category: "clothes",
 		description:
 			'Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.',
 
@@ -33,11 +34,12 @@ const fakeData = [
 		added: '2022-03-04',
 		sellerId: '624706557e53beb38dae2af3',
 		price: 2235,
-		stock: 1,
+		stock: 3,
+		promoted: false,
 		title: 'Mens Casual Premium Slim Fit T-Shirts ',
 	},
 	{
-		category: "men's clothing",
+		category: "clothes",
 		description:
 			'great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.',
 
@@ -47,14 +49,15 @@ const fakeData = [
 			'http://ecx.images-amazon.com/images/I/41kXCp%2BUyeL._SL160_.jpg',
 		],
 		city: 'Djibouti City',
+		promoted: true,
 		added: '2022-03-05',
 		sellerId: '624706557e53beb38dae2af3',
 		price: 5599,
-		stock: 1,
+		stock: 2,
 		title: 'Mens Cotton Jacket',
 	},
 	{
-		category: "men's clothing",
+		category: "clothes",
 		description:
 			'The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.',
 
@@ -68,6 +71,7 @@ const fakeData = [
 		sellerId: '624706557e53beb38dae2af3',
 		price: 1596,
 		stock: 1,
+		promoted: false,
 		title: 'Mens Casual Slim Fit',
 	},
 	{
@@ -81,10 +85,11 @@ const fakeData = [
 			'http://ecx.images-amazon.com/images/I/41kXCp%2BUyeL._SL160_.jpg',
 		],
 		city: 'Ali-Sabieh',
+		promoted: false,
 		added: '2022-03-09',
 		sellerId: '624706557e53beb38dae2af3',
 		price: 1695,
-		stock: 1,
+		stock: 5,
 		title:
 			"John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
 	},
@@ -92,7 +97,7 @@ const fakeData = [
 		category: 'jewelery',
 		description:
 			'Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.',
-
+		promoted: false,
 		images: [
 			'https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg',
 			'http://ecx.images-amazon.com/images/I/51i1Xy1BxHL._SL75_.jpg',
@@ -115,18 +120,19 @@ const fakeData = [
 			'http://ecx.images-amazon.com/images/I/51i1Xy1BxHL._SL75_.jpg',
 			'http://ecx.images-amazon.com/images/I/41kXCp%2BUyeL._SL160_.jpg',
 		],
+		promoted: true,
 		city: 'Dikhil',
 		added: '2022-03-04',
 		sellerId: '624709117e53beb38dae2af4',
 		price: 9990,
-		stock: 1,
+		stock: 4,
 		title: 'White Gold Plated Princess',
 	},
 	{
 		category: 'jewelery',
 		description:
 			'Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel',
-
+		promoted: false,
 		images: [
 			'https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg',
 			'http://ecx.images-amazon.com/images/I/51i1Xy1BxHL._SL75_.jpg',
@@ -136,7 +142,7 @@ const fakeData = [
 		added: '2022-03-29',
 		sellerId: '624709117e53beb38dae2af4',
 		price: 1099,
-		stock: 1,
+		stock: 2,
 		title: 'Pierced Owl Rose Gold Plated Stainless Steel Double',
 	},
 	{
@@ -153,7 +159,8 @@ const fakeData = [
 		added: '2022-02-12',
 		sellerId: '624709117e53beb38dae2af4',
 		price: 6400,
-		stock: 1,
+		stock: 6,
+		promoted: false,
 		title: 'WD 2TB Elements Portable External Hard Drive - USB 3.0 ',
 	},
 	{
@@ -171,6 +178,7 @@ const fakeData = [
 		sellerId: '624709117e53beb38dae2af4',
 		price: 1090,
 		stock: 1,
+		promoted: true,
 		title: 'SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s',
 	},
 	{
@@ -187,7 +195,8 @@ const fakeData = [
 		added: '2022-02-19',
 		sellerId: '6247096f7e53beb38dae2af5',
 		price: 1090,
-		stock: 1,
+		stock: 3,
+		promoted: false,
 		title:
 			'Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5',
 	},
@@ -205,7 +214,8 @@ const fakeData = [
 		added: '2022-02-02',
 		sellerId: '6247096f7e53beb38dae2af5',
 		price: 1140,
-		stock: 1,
+		promoted: true,
+		stock: 5,
 		title:
 			'WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive',
 	},
@@ -223,7 +233,8 @@ const fakeData = [
 		added: '2022-01-22',
 		sellerId: '6247096f7e53beb38dae2af5',
 		price: 5990,
-		stock: 1,
+		promoted: false,
+		stock: 2,
 		title: 'Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin',
 	},
 	{
@@ -237,18 +248,19 @@ const fakeData = [
 			'http://ecx.images-amazon.com/images/I/41kXCp%2BUyeL._SL160_.jpg',
 		],
 		city: 'Tadjoura',
+		promoted: true,
 		added: '2022-02-24',
 		sellerId: '6247096f7e53beb38dae2af5',
 		price: 9999,
-		stock: 1,
+		stock: 12,
 		title:
 			'Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ',
 	},
 	{
-		category: "women's clothing",
+		category: "clothes",
 		description:
 			'Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates',
-
+		promoted: false,
 		images: [
 			'https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg',
 			'http://ecx.images-amazon.com/images/I/51i1Xy1BxHL._SL75_.jpg',
@@ -258,11 +270,11 @@ const fakeData = [
 		added: '2022-01-13',
 		sellerId: '6247096f7e53beb38dae2af5',
 		price: 5699,
-		stock: 1,
+		stock: 4,
 		title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
 	},
 	{
-		category: "women's clothing",
+		category: "clothes",
 		description:
 			'100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON',
 
@@ -276,11 +288,12 @@ const fakeData = [
 		sellerId: '62470a417e53beb38dae2af6',
 		price: 2995,
 		stock: 1,
+		promoted: false,
 		title:
 			"Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
 	},
 	{
-		category: "women's clothing",
+		category: "clothes",
 		description:
 			"Lightweight perfet for trip or casual wear---Long sleeve with hooded, adjustable drawstring waist design. Button and zipper front closure raincoat, fully stripes Lined and The Raincoat has 2 side pockets are a good size to hold all kinds of things, it covers the hips, and the hood is generous but doesn't overdo it.Attached Cotton Lined Hood with Adjustable Drawstrings give it a real styled look.",
 
@@ -290,14 +303,15 @@ const fakeData = [
 			'http://ecx.images-amazon.com/images/I/41kXCp%2BUyeL._SL160_.jpg',
 		],
 		price: 3999,
-		stock: 1,
+		stock: 3,
 		city: 'Arta',
+		promoted: false,
 		added: '2022-02-11',
 		sellerId: '62470a417e53beb38dae2af6',
 		title: 'Rain Jacket Women Windbreaker Striped Climbing Raincoats',
 	},
 	{
-		category: "women's clothing",
+		category: "clothes",
 		description:
 			'95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem',
 
@@ -311,10 +325,11 @@ const fakeData = [
 		sellerId: '62470a417e53beb38dae2af6',
 		price: 9985,
 		stock: 1,
+		promoted: true,
 		title: "MBJ Women's Solid Short Sleeve Boat Neck V ",
 	},
 	{
-		category: "women's clothing",
+		category: "clothes",
 		description:
 			'100% Polyester, Machine wash, 100% cationic polyester interlock, Machine Wash & Pre Shrunk for a Great Fit, Lightweight, roomy and highly breathable with moisture wicking fabric which helps to keep moisture away, Soft Lightweight Fabric with comfortable V-neck collar and a slimmer fit, delivers a sleek, more feminine silhouette and Added Comfort',
 
@@ -327,11 +342,12 @@ const fakeData = [
 		added: '2022-01-26',
 		sellerId: '62470a417e53beb38dae2af6',
 		price: 7095,
-		stock: 1,
+		promoted: false,
+		stock: 2,
 		title: "Opna Women's Short Sleeve Moisture",
 	},
 	{
-		category: "women's clothing",
+		category: "clothes",
 		description:
 			'95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.',
 		images: [
@@ -344,6 +360,7 @@ const fakeData = [
 		sellerId: '62470a417e53beb38dae2af6',
 		price: 1299,
 		stock: 1,
+		promoted: true,
 		title: 'DANVOUY Womens T Shirt Casual Cotton Short',
 	},
 ];

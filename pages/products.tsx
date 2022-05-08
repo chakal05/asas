@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { InferGetServerSidePropsType, NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,35 +7,18 @@ import Search from '../components/search';
 import { useAppSelector } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import { ProductType } from '../interfaces/index';
-import filter from '../features/filter';
+import filter from '../store/filter';
 import Categories from '../components/categories';
-import { addProducts } from '../features/productsSlice';
-import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-
-const ImageWrap = styled.span`
-	box-sizing: content-box;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	& > span {
-	}
-`;
+import { getByCity, getByCategory } from '../utils/productsApiCalls';
 
 const Posts = ({
 	products,
+	promoted,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	// TODO Sort product according to btns
 	const [data, setData] = useState(products);
 	const { filters } = useAppSelector((state: RootState) => state.filters);
-	// const { products } = useAppSelector((state: RootState) => state.produts);
-	const filtered: ProductType[] = filter(data, { filters });
+	const filtered = filter(data, { filters });
 
-	// useEffect(() => {
-	// 	addProducts(products)
-	//  }, [])
 	return (
 		<div>
 			<Head>
@@ -45,10 +29,7 @@ const Posts = ({
 			<div className=''>
 				<Search
 					submit={async (city) => {
-						const res = await fetch(
-							`http://localhost:3000/api/products/?city=${city}`
-						);
-						const products = await res.json();
+						const products = await getByCity(city);
 						setData(products);
 					}}
 				/>
@@ -58,7 +39,7 @@ const Posts = ({
 			</div>
 
 			<div className='md:flex'>
-				<div className='md:basis-4/5'>
+				<div className='md:basis-4/5 px-2 md:px-0'>
 					{filtered.map((item) => {
 						return (
 							<Link
@@ -72,18 +53,12 @@ const Posts = ({
 								key={item._id}
 							>
 								<a>
-									<div className='border-2 my-2 py-1 rounded shadow-lg hover:bg-slate-50  '>
-
+									<div className='bg-white my-2 py-1 rounded shadow-lg hover:bg-slate-50  '>
 										<div className='flex py-1 '>
 											<div className='basis-1/5 '>
-												<ImageWrap>
-													<Image
-														src={item.images[0]}
-														alt='sr'
-														height={120}
-														width={130}
-													/>
-												</ImageWrap>
+												<div className='relative w-32 h-32 mx-auto'>
+													<Image src={item.images[0]} alt='sr' layout='fill' />
+												</div>
 											</div>
 											<div className='basis-4/5 pl-5 '>
 												<div className='grid grid-cols-2 '>
@@ -96,12 +71,12 @@ const Posts = ({
 													</p>
 												</div>
 
-												<p className='text-md sm:text-xl font-thin my-1 sm:my-3 no-underline hover:underline'>
+												<p className='text-md sm:text-xl  my-1 sm:my-3 no-underline hover:underline'>
 													{item.title}
 												</p>
-												<p className='text-md sm:text-xl font-bold '>
+												<p className='text-lg sm:text-xl text-sky-900 font-bold '>
 													{' '}
-													{item.price} ${' '}
+													{item.price} FDj{' '}
 												</p>
 											</div>
 										</div>
@@ -113,23 +88,41 @@ const Posts = ({
 				</div>
 
 				<div className='hidden md:block md:basis-1/5 md:ml-3 p-2'>
-					<ul className='border-2'>
-						<p className='text-center font-bold text-3xl mb-3'> Latest </p>
-						{filtered.map((product) => {
+					<ul className='bg-white divide-y rounded shadow-lg '>
+						<p className='text-center font-bold text-xl mb-3 text-sky-900'>
+							{' '}
+							Promoted{' '}
+						</p>
+						{promoted.map((product) => {
 							return (
-								<li key={product._id}>
-									<div className='flex flex-col  justify-center items-center '>
-										<ImageWrap>
-											<Image
-												src={product.images[0]}
-												alt='sr'
-												height={100}
-												width={100}
-											/>
-										</ImageWrap>
-										<p className='text-center'> {product.title} </p>
-										<p className='font-bold'> {product.price} </p>
-									</div>
+								<li className='p-2' key={product._id}>
+									<Link
+										href={{
+											pathname: `/productItem/`,
+											query: {
+												id: product._id,
+											},
+										}}
+										passHref
+									>
+										<a>
+											<div className='flex flex-col  justify-center items-center '>
+												<div className=' relative w-36 h-36'>
+													<Image
+														src={product.images[0]}
+														alt='sr'
+														layout='fill'
+													/>
+												</div>
+												<div className='text-center '>
+													<p className='my-1'> {product.title} </p>
+													<p className='font-bold text-lg text-sky-900'>
+														{product.price} FDj{' '}
+													</p>
+												</div>
+											</div>
+										</a>
+									</Link>
 								</li>
 							);
 						})}
@@ -141,16 +134,23 @@ const Posts = ({
 };
 
 export const getServerSideProps = async (context) => {
-	const { city } = context.query;
-	const res = await fetch(`http://localhost:3000/api/products/?city=${city}`);
-	const products = await res.json();
+	const { city, category } = context.query;
+	let products;
+	if (city) {
+		products = await getByCity(city);
+	}
 
+	if (category) {
+		products = await getByCategory(category);
+	}
+
+	const getPromo = await fetch(
+		`http://localhost:3000/api/products/?promoted=${true}`
+	);
+	const promoted = await getPromo.json();
 	return {
-		props: { products },
+		props: { products, promoted },
 	};
 };
 
 export default Posts;
-
-
-//JSON.parse(JSON.stringify(res))

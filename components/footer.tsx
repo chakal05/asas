@@ -3,9 +3,9 @@ const Footer = () => {
 	return (
 		<div className='p-3 mt-9 '>
 			<div className='w-full border-t border-slate-300'></div>
-			<div className='flex justify-between'>
+			<div className='flex justify-around text-slate-600'>
 				<div className='py-3 pl-3 '>
-					<p className='font-bold text-lg my-1'> Asas </p>
+					<p className='font-bold text-xl my-1 text-sky-900'> Asas </p>
 					<ul>
 						<li> About Asas</li>
 						<li> Contact us</li>
@@ -16,7 +16,7 @@ const Footer = () => {
 				</div>
 
 				<div className='text-right py-3 pr-3 '>
-					<p className='font-bold text-lg my-1'> For compagnies </p>
+					<p className='font-bold text-xl my-1 text-sky-900'> For compagnies </p>
 					<ul>
 						<li> Manage store ads</li>
 						<li> Store opening</li>

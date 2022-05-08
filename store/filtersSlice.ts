@@ -3,7 +3,7 @@ import { FilterState } from '../interfaces';
 
 const initialState: FilterState = {
 	filters: {
-		id: 0,
+		_id: '',
 		title: '',
 		city: '',
 		added: '',
