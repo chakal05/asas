@@ -1,11 +1,15 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
 	mode: 'jit',
 	content: [
 		'./pages/**/*.{js,ts,jsx,tsx}',
 		'./components/**/*.{js,ts,jsx,tsx}',
-
 	],
 	theme: {
+		screens: {
+			xs: '425px',
+			...defaultTheme.screens,
+		},
 		extend: {
 			container: {
 				center: true,
@@ -25,6 +29,7 @@ module.exports = {
 				display: ['roboto'],
 				body: ['"roboto"'],
 			},
+
 		},
 	},
 	plugins: [require('tailwindcss'), require('autoprefixer')],

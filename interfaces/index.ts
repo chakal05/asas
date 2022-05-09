@@ -18,7 +18,6 @@ export interface DataState {
 
 export interface FilterState {
 	filters: {
-		_id: string;
 		title: string;
 		price: number;
 		category: string;

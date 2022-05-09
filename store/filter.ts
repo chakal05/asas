@@ -1,7 +1,7 @@
 import { FilterState, ProductType } from '../interfaces';
 
 const filter = (products: ProductType[], { filters }: FilterState) => {
-	const { title, city, price, category, added, _id } = filters;
+	const { title, city, price, category, added } = filters;
 	return products.filter(
 		(item: {
 			title: string;
@@ -18,9 +18,7 @@ const filter = (products: ProductType[], { filters }: FilterState) => {
 
 			const getByText = textInTitle || textInDescription;
 			const getByCIty = item.city.toLowerCase().match(city.toLowerCase());
-			const getByCategory = item.category
-				.toLowerCase()
-				.match(category.toLowerCase());
+			const getByCategory = item.category.match(category);
 
 			if (title && city === 'All over Djibouti') return getByText;
 			if (title && city !== 'All over Djibouti') return getByText && getByCIty;

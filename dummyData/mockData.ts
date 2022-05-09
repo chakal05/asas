@@ -1,4 +1,4 @@
-import { ProductType } from '../../interfaces';
+import { ProductType } from '../interfaces';
 // const { connectToDatabase } = require('../../db/mongo');
 // const ObjectId = require('mongodb').ObjectId;
 

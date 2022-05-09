@@ -1,7 +1,12 @@
 import * as React from 'react';
 
-import { useAppDispatch } from '../redux/hooks';
-import { filterByCity, filterByText } from '../store/filtersSlice';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { RootState } from '../redux/store';
+import {
+	filterByCity,
+	filterByText,
+	filterByCategory,
+} from '../store/filtersSlice';
 
 type Props = {
 	submit: (city: string) => void;
@@ -9,8 +14,10 @@ type Props = {
 
 const SearchBox: React.FC<Props> = ({ submit }) => {
 	const dispatch = useAppDispatch();
-	const [city, setCity] = React.useState('All over Djibouti');
-	const [product, setProduct] = React.useState('');
+	const { filters } = useAppSelector((state: RootState) => state.filters);
+	const { title, city } = filters;
+	const [theCity, setTheCity] = React.useState(city);
+	const [product, setProduct] = React.useState(title);
 
 	const handleProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setProduct(event.target.value);
@@ -18,11 +25,11 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 
 	const handleCity = (event: React.FormEvent<HTMLSelectElement>) => {
 		const el = event.target as HTMLSelectElement;
-		setCity(el.value);
+		setTheCity(el.value);
 	};
 
 	const handleSubmit = () => {
-		dispatch(filterByCity(city));
+		dispatch(filterByCity(theCity));
 		dispatch(filterByText(product));
 	};
 
@@ -49,7 +56,7 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 				</div>
 				<div className='my-3 sm:my-1 sm:basis-2/5 sm:mx-0.5'>
 					<select
-						value={city}
+						value={theCity}
 						onChange={handleCity}
 						className='border border-slate-300 bg-white text-slate-700 rounded-md w-full h-14 p-2'
 					>
@@ -66,7 +73,7 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 						type='button'
 						onClick={() => {
 							handleSubmit();
-							submit(city);
+							submit(theCity);
 						}}
 						className='bg-sky-900 text-white rounded-md p-4 w-full'
 					>

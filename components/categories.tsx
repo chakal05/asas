@@ -63,7 +63,7 @@ const Categories: React.FC<Props> = ({ submitCategory }) => {
 						<li key={index} className='text-sm'>
 							<div className='text-center text-slate-700 '>
 								<button
-									onClick={() =>submitCategory(item.title.toLowerCase())}
+									onClick={() =>submitCategory(item.title)}
 								>
 									<FontAwesomeIcon
 										className='w-full text-4xl mb-2 text-sky-900'

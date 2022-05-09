@@ -3,9 +3,8 @@ import { FilterState } from '../interfaces';
 
 const initialState: FilterState = {
 	filters: {
-		_id: '',
 		title: '',
-		city: '',
+		city: 'All over Djibouti',
 		added: '',
 		category: '',
 		price: 0,
@@ -28,6 +27,6 @@ export const filtersSlice = createSlice({
 	},
 });
 
-export const { filterByText, filterByCity } = filtersSlice.actions;
+export const { filterByText, filterByCity, filterByCategory } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

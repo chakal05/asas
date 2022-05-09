@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import type { InferGetServerSidePropsType, NextPage } from 'next';
@@ -8,14 +8,20 @@ import {
 	faCircleChevronRight,
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { getByCategory, getProductById } from '../utils/productsApiCalls';
+import { getUser } from '../utils/usersApiCalls';
+import { filterCategory } from '../utils/sharedFeatures';
 
 const Product = ({
 	product,
 	sellerInfo,
-	sameCategorie,
+	sameCategory,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const { title, description, images, price } = product;
+	const [productData, setProductData] = useState(product);
+	const [sameCategoryList, setSameCategoryList] = useState(sameCategory);
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const { title, description, images, price } = productData;
+
 	const nextSlide = () => {
 		let newSlide = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
 		setCurrentSlide(newSlide);
@@ -25,6 +31,7 @@ const Product = ({
 		let newSlide = currentSlide === 0 ? images.length - 1 : currentSlide - 1;
 		setCurrentSlide(newSlide);
 	};
+
 	return (
 		<div>
 			<Head>
@@ -34,9 +41,9 @@ const Product = ({
 			</Head>
 
 			<div className='md:flex'>
-				<div className='bg-white  shadow-lg rounded-lg border-2 mx-1 mt-1 md:basis-4/6 '>
+				<div className='bg-white shadow-lg rounded-lg border-2 mx-1 mt-1 md:basis-4/6 '>
 					<div id='default-carousel' className='relative'>
-						<div className='overflow-hidden relative rounded-lg  h-[16rem] w-10/12 sm:w-9/12  sm:h-72 xl:h-80 2xl:h-96 mx-auto'>
+						<div className='overflow-hidden relative rounded-lg h-[16rem] w-[19rem] xs:w-[23rem] sm:w-[27rem] sm:h-72 xl:h-80  2xl:h-96 mx-auto'>
 							<div className=' duration-700 ease-in-out '>
 								{images.map((img, index) => {
 									return (
@@ -183,38 +190,40 @@ const Product = ({
 					{' '}
 					Others also looked at{' '}
 				</p>
-				<ul className='md:flex  '>
-					{sameCategorie.map((item, index) => {
+				<ul className='md:grid grid-cols-4 gap-4  '>
+					{sameCategoryList.map((item, index) => {
 						return (
 							<li
 								key={index}
 								className=' bg-white p-3 shadow-lg rounded-lg border-2  md:mx-3 my-3 mx-2'
 							>
-								<Link
-									href={{
-										pathname: `/productItem/`,
-										query: {
-											id: item._id,
-										},
+								<button
+									onClick={async () => {
+										const clickedOnProduct = await getProductById(item._id);
+										const getSameCategory = await getByCategory(
+											clickedOnProduct.category
+										);
+										setProductData(clickedOnProduct);
+										setSameCategoryList(
+											filterCategory(getSameCategory, item._id)
+										);
+										setCurrentSlide(0);
 									}}
-									passHref
 								>
-									<a>
-										<div className='relative w-48 h-44 md:w-40 md:h-40  mx-auto '>
-											<Image
-												src={item.images[0]}
-												layout='fill'
-												objectFit='fill'
-												alt='ds'
-											/>
-										</div>
-										<div className='p-1'>
-											<p className=' text-lg'> {item.city} </p>
-											<p className='text-xl text-sky-900'> {item.title}</p>
-											<p className='font-bold text-xl '> {item.price} FDj </p>
-										</div>
-									</a>
-								</Link>
+									<div className='relative w-48 h-44 md:w-40 md:h-40  mx-auto '>
+										<Image
+											src={item.images[0]}
+											layout='fill'
+											objectFit='fill'
+											alt='ds'
+										/>
+									</div>
+									<div className='p-1'>
+										<p className=' text-lg'> {item.city} </p>
+										<p className='text-xl text-sky-900'> {item.title}</p>
+										<p className='font-bold text-xl '> {item.price} FDj </p>
+									</div>
+								</button>
 							</li>
 						);
 					})}
@@ -227,27 +236,25 @@ const Product = ({
 export const getServerSideProps = async (context) => {
 	const { id } = context.query;
 
-	const res = await fetch(`http://localhost:3000/api/products/?id=${id}`);
-	const product = await res.json();
+	const product = await getProductById(id);
 
-	// get sellerId name
+	/**
+	 * Using the product data, find user info and
+	 * product of same category
+	 */
 	const { sellerId, category } = product;
-	const seller = await fetch(
-		`http://localhost:3000/api/products/?sellerId=${sellerId}`
-	);
-	const sellerInfo = await seller.json();
 
-	// get products of same categorie
+	// Get seller info
+	const sellerInfo = await getUser(sellerId);
 
-	const productCategorie = await fetch(
-		`http://localhost:3000/api/products/?category=${category}`
-	);
+	// get products of same category
+	const resCategory = await getByCategory(category);
 
-	let categorie = await productCategorie.json();
-	const sameCategorie = categorie.slice(0,4);
-	let b = [].slice(0,4)
+	// Get 4 products of the same category
+	const sameCategory = filterCategory(resCategory, id);
+
 	return {
-		props: { product, sellerInfo, sameCategorie },
+		props: { product, sellerInfo, sameCategory },
 	};
 };
 

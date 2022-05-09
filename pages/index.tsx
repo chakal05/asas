@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Search from '../components/search';
 import Categories from '../components/categories';
 import { useAppDispatch } from '../redux/hooks';
-
+import { filterByCategory } from '../store/filtersSlice';
 // {
 // 	products,
 // }: InferGetServerSidePropsType<typeof getServerSideProps>
@@ -45,9 +45,11 @@ function Home() {
 			<div className='my-8'>
 				<Categories
 					submitCategory={(category) => {
+						dispatch(filterByCategory(category));
+						const formatedString = category.toLowerCase();
 						router.push({
 							pathname: '/products/',
-							query: { category },
+							query: { category: formatedString },
 						});
 					}}
 				/>

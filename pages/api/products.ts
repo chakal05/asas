@@ -3,10 +3,12 @@ import { ObjectId } from 'mongodb';
 
 const products = async (req, res) => {
 	const client = await middleware;
+	const db = client.db('asas');
 	if (req.method === 'GET') {
-		const { city, id, sellerId, category, promoted } = req.query;
-		const db = client.db('asas');
+		const { city, id, category, promoted } = req.query;
+
 		let result;
+
 		if (city) {
 			if (city === 'All over Djibouti') {
 				result = await db.collection('products').find({}).toArray();
@@ -19,10 +21,6 @@ const products = async (req, res) => {
 			result = await db
 				.collection('products')
 				.findOne({ _id: new ObjectId(id) });
-		}
-
-		if (sellerId) {
-			result = await db.collection('users').findOne({ _id: sellerId });
 		}
 
 		if (category) {

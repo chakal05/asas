@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
 import Search from '../components/search';
-import { useAppSelector } from '../redux/hooks';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import { ProductType } from '../interfaces/index';
 import filter from '../store/filter';
@@ -15,15 +15,26 @@ import {
 	getPromoted,
 } from '../utils/productsApiCalls';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCar, faFaceSurprise } from '@fortawesome/free-solid-svg-icons';
+import { faFaceSurprise } from '@fortawesome/free-solid-svg-icons';
+import {
+	filterByCategory,
+	filterByCity,
+	filterByText,
+} from '../store/filtersSlice';
 
 const Posts = ({
 	products,
 	promoted,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [data, setData] = useState(products);
+	const dispatch = useAppDispatch();
 	const { filters } = useAppSelector((state: RootState) => state.filters);
 	const filtered = filter(data, { filters });
+	const { title, city, category } = filters;
+	const [search , setSearch] = useState();
+
+
+
 
 	return (
 		<div>
@@ -35,86 +46,110 @@ const Posts = ({
 			<div className=''>
 				<Search
 					submit={async (city) => {
-						const products = await getByCity(city);
-						setData(products);
+						const productsByCity = await getByCity(city);
+						setData(productsByCity);
 					}}
 				/>
 			</div>
 			<div className=''>
 				<Categories
 					submitCategory={async (category) => {
-						const products = await getByCategory(category);
-						setData(products);
+						const productsByCategory = await getByCategory(
+							category.toLowerCase()
+						);
+						dispatch(filterByCategory(category));
+						dispatch(filterByText(''));
+						setData(productsByCategory);
 					}}
 				/>
 			</div>
 
 			<div className='md:flex'>
-				<div className='md:basis-4/5 px-2 md:px-0'>
-					{filtered.map((item) => {
-						return (
-							<Link
-								href={{
-									pathname: `/productItem/`,
-									query: {
-										id: item._id,
-									},
-								}}
-								passHref
-								key={item._id}
-							>
-								<a>
-									<div className='bg-white my-2 py-1 rounded shadow-lg hover:bg-slate-50  '>
-										<div className='flex py-1 '>
-											<div className='basis-1/5 '>
-												<div className='relative w-32 h-32 mx-auto'>
-													<Image src={item.images[0]} alt='sr' layout='fill' />
-												</div>
-											</div>
-											<div className='basis-4/5 pl-5 '>
-												<div className='grid grid-cols-2 '>
-													<p className='text-sm sm:text-lg  text-slate-700'>
-														{item.city}
-													</p>
-													<p className='text-right pr-3 text-sm sm:text-lg  text-slate-500'>
-														{' '}
-														{item.added}{' '}
-													</p>
-												</div>
+				<div className='md:basis-4/5 px-2 '>
+					<div className='p-2 mt-3 md:flex'>
+						<p className='text-xl font-bold md:mr-3'>
+							{city === 'All over Djibouti'
+								? `${
+										search ? ` "${search}" - ` : ''
+								  } On sell throughout Djibouti`
+								: `${search ? ` "${search}" - ` : ''} On sell in ${city}`}
+						</p>
 
-												<p className='text-md sm:text-xl  my-1 sm:my-3 no-underline hover:underline'>
-													{item.title}
-												</p>
-												<p className='text-lg sm:text-xl text-sky-900 font-bold '>
-													{' '}
-													{item.price} FDj{' '}
-												</p>
+						<p className='text-xl md:pt-[0.55px] text-slate-600'>
+							{' '}
+							{filtered.length} ads found{' '}
+						</p>
+					</div>
+					<div>
+						{filtered.map((item) => {
+							return (
+								<Link
+									href={{
+										pathname: `/productItem/`,
+										query: {
+											id: item._id,
+										},
+									}}
+									passHref
+									key={item._id}
+								>
+									<a>
+										<div className='bg-white my-2 py-1 rounded shadow-lg hover:bg-slate-50  '>
+											<div className='flex py-1 '>
+												<div className='basis-1/5 '>
+													<div className='relative w-32 h-32 mx-auto'>
+														<Image
+															src={item.images[0]}
+															alt='sr'
+															layout='fill'
+														/>
+													</div>
+												</div>
+												<div className='basis-4/5 pl-5 '>
+													<div className='grid grid-cols-2 '>
+														<p className='text-sm sm:text-lg  text-slate-700'>
+															{item.city}
+														</p>
+														<p className='text-right pr-3 text-sm sm:text-lg  text-slate-500'>
+															{' '}
+															{item.added}{' '}
+														</p>
+													</div>
+
+													<p className='text-md sm:text-xl  my-1 sm:my-3 no-underline hover:underline'>
+														{item.title}
+													</p>
+													<p className='text-lg sm:text-xl text-sky-900 font-bold '>
+														{' '}
+														{item.price} FDj{' '}
+													</p>
+												</div>
 											</div>
 										</div>
+									</a>
+								</Link>
+							);
+						})}
+						{!filtered[0] && (
+							<div className='text-center w-4/5 mx-auto px-2 py-6 bg-white shadow-lg rounded-lg border-2 mt-20 mb-40'>
+								<div className=''>
+									<div>
+										<FontAwesomeIcon
+											className='text-7xl text-sky-900'
+											icon={faFaceSurprise}
+										/>
+										<p className='text-3xl font-bold my-6 text-sky-900'>
+											No match Found{' '}
+										</p>
+										<p className='text-xl text-slate-700'>
+											There are no results that match your current filters. Try
+											removing some of them to get better results.
+										</p>
 									</div>
-								</a>
-							</Link>
-						);
-					})}
-					{!filtered[0] && (
-						<div className='text-center w-4/5 mx-auto px-2 py-6 bg-white shadow-lg rounded-lg border-2 mt-20 mb-40'>
-							<div className=''>
-								<div>
-									<FontAwesomeIcon
-										className='text-7xl text-sky-900'
-										icon={faFaceSurprise}
-									/>
-									<p className='text-5xl font-bold my-6 text-sky-900'>
-										No match Found{' '}
-									</p>
-									<p className='text-2xl text-slate-700'>
-										There are no results that match your current filters. Try
-										removing some of them to get better results.
-									</p>
 								</div>
 							</div>
-						</div>
-					)}
+						)}
+					</div>
 				</div>
 
 				<div className='hidden md:block md:basis-1/5 md:ml-3 p-2'>

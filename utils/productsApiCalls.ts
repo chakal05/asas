@@ -1,18 +1,14 @@
-let dev;
+import {setEnv} from './sharedFeatures';
 
-if (process.env.NODE_ENV === 'development') {
-	dev = process.env.NEXT_PUBLIC_DEV_URL;
-} else {
-	dev = process.env.NEXT_PUBLIC_PROD_URL;
-}
+const dev = setEnv();
 
-const getByCity = async (city) => {
+const getByCity = async (city: string) => {
 	const res = await fetch(`${dev}/api/products/?city=${city}`);
 	const products = await res.json();
 	return products;
 };
 
-const getByCategory = async (category) => {
+const getByCategory = async (category: string) => {
 	const res = await fetch(`${dev}/api/products/?category=${category}`);
 	const products = await res.json();
 	return products;
@@ -24,4 +20,10 @@ const getPromoted = async () => {
 	return products;
 };
 
-export { getByCity, getByCategory, getPromoted };
+const getProductById = async (id: string) => {
+	const res = await fetch(`${dev}/api/products/?id=${id}`);
+	const product = await res.json();
+	return product;
+};
+
+export { getByCity, getByCategory, getPromoted, getProductById};
