@@ -15,7 +15,7 @@ import { getByCategory } from '../utils/productsApiCalls';
 const categories = [
 	{
 		icon: faCar,
-		title: 'Car',
+		title: 'Cars',
 	},
 	{
 		icon: faBed,
