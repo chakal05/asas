@@ -75,12 +75,12 @@ const Categories: React.FC<Props> = ({ submitCategory }) => {
 						</li>
 					);
 				})}
-				<li className='m-1'>
+				<li className='text-sm sm:text-lg'>
 					<div className='text-center text-slate-700 '>
 						<Link href={'/categories'}>
 							<a>
 								<FontAwesomeIcon
-									className='w-full text-2xl sm:text-4xl mb-2 text-sky-900'
+									className='w-full text-2xl sm:text-4xl mb-2 sm:mb-3 text-sky-900'
 									icon={faLayerGroup}
 								/>
 								{'All'}
