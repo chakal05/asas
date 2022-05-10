@@ -25,15 +25,14 @@ import {
 const Posts = ({
 	products,
 	promoted,
-	city, search
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [data, setData] = useState(products);
 	const dispatch = useAppDispatch();
 	const { filters } = useAppSelector((state: RootState) => state.filters);
 	const filtered = filter(data, { filters });
-	// const { title, city, category } = filters;
+	const { title, city, category } = filters;
 	const [location, setLocation] = useState(city)
-	const [queryString , setQueryString] = useState(search);
+	const [queryString , setQueryString] = useState(title);
 
 
 
@@ -64,6 +63,7 @@ const Posts = ({
 						// dispatch(filterByCategory(category));
 						// dispatch(filterByText(''));
 						setData(productsByCategory);
+						setQueryString(passedCategory)
 
 					}}
 				/>
