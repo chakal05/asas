@@ -190,12 +190,12 @@ const Product = ({
 					{' '}
 					Others also looked at{' '}
 				</p>
-				<ul className='md:grid grid-cols-4 gap-4  '>
+				<ul className='md:grid grid-cols-4 gap-2 '>
 					{sameCategoryList.map((item, index) => {
 						return (
 							<li
 								key={index}
-								className=' bg-white p-3 shadow-lg rounded-lg border-2  md:mx-3 my-3 mx-2'
+								className=' bg-white text-center p-3 shadow-lg rounded-lg border-2  md:mx-0 my-3 mx-2'
 							>
 								<button
 									onClick={async () => {
@@ -214,7 +214,6 @@ const Product = ({
 										<Image
 											src={item.images[0]}
 											layout='fill'
-											objectFit='fill'
 											alt='ds'
 										/>
 									</div>

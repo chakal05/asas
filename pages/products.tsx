@@ -25,13 +25,15 @@ import {
 const Posts = ({
 	products,
 	promoted,
+	city, search
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [data, setData] = useState(products);
 	const dispatch = useAppDispatch();
 	const { filters } = useAppSelector((state: RootState) => state.filters);
 	const filtered = filter(data, { filters });
-	const { title, city, category } = filters;
-	const [search , setSearch] = useState();
+	// const { title, city, category } = filters;
+	const [location, setLocation] = useState(city)
+	const [queryString , setQueryString] = useState(search);
 
 
 
@@ -45,21 +47,24 @@ const Posts = ({
 			</Head>
 			<div className=''>
 				<Search
-					submit={async (city) => {
-						const productsByCity = await getByCity(city);
+					submit={async (passedCity, passedQuery) => {
+						const productsByCity = await getByCity(passedCity);
 						setData(productsByCity);
+						setLocation(passedCity);
+						setQueryString(passedQuery);
 					}}
 				/>
 			</div>
 			<div className=''>
 				<Categories
-					submitCategory={async (category) => {
+					submitCategory={async (passedCategory) => {
 						const productsByCategory = await getByCategory(
-							category.toLowerCase()
+							passedCategory.toLowerCase()
 						);
-						dispatch(filterByCategory(category));
-						dispatch(filterByText(''));
+						// dispatch(filterByCategory(category));
+						// dispatch(filterByText(''));
 						setData(productsByCategory);
+
 					}}
 				/>
 			</div>
@@ -68,11 +73,11 @@ const Posts = ({
 				<div className='md:basis-4/5 px-2 '>
 					<div className='p-2 mt-3 md:flex'>
 						<p className='text-xl font-bold md:mr-3'>
-							{city === 'All over Djibouti'
+							{location === 'All over Djibouti'
 								? `${
-										search ? ` "${search}" - ` : ''
+									queryString ? ` "${queryString}" - ` : ''
 								  } On sell throughout Djibouti`
-								: `${search ? ` "${search}" - ` : ''} On sell in ${city}`}
+								: `${queryString ? ` "${queryString}" - ` : ''} On sell in ${city}`}
 						</p>
 
 						<p className='text-xl md:pt-[0.55px] text-slate-600'>
@@ -199,7 +204,7 @@ const Posts = ({
 };
 
 export const getServerSideProps = async (context) => {
-	const { city, category } = context.query;
+	const { city, category, search } = context.query;
 	let products;
 	if (city) {
 		products = await getByCity(city);
@@ -209,9 +214,11 @@ export const getServerSideProps = async (context) => {
 		products = await getByCategory(category);
 	}
 
+
+
 	const promoted = await getPromoted();
 	return {
-		props: { products, promoted },
+		props: { products, promoted, city, search },
 	};
 };
 

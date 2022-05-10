@@ -30,11 +30,12 @@ function Home() {
 				</div>
 				<div className=''>
 					<Search
-						submit={(city) => {
+						submit={(city, search) => {
 							router.push({
 								pathname: '/products/',
 								query: {
 									city,
+									search,
 								},
 							});
 						}}

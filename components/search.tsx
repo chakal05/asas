@@ -1,36 +1,29 @@
 import * as React from 'react';
 
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { RootState } from '../redux/store';
-import {
-	filterByCity,
-	filterByText,
-	filterByCategory,
-} from '../store/filtersSlice';
+import { useAppDispatch } from '../redux/hooks';
+import { filterByCity, filterByText } from '../store/filtersSlice';
 
 type Props = {
-	submit: (city: string) => void;
+	submit: (city: string, search: string) => void;
 };
 
 const SearchBox: React.FC<Props> = ({ submit }) => {
 	const dispatch = useAppDispatch();
-	const { filters } = useAppSelector((state: RootState) => state.filters);
-	const { title, city } = filters;
-	const [theCity, setTheCity] = React.useState(city);
-	const [product, setProduct] = React.useState(title);
+	const [city, setCity] = React.useState('All over Djibouti');
+	const [searchQuery, setsearchQuery] = React.useState('');
 
 	const handleProduct = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setProduct(event.target.value);
+		setsearchQuery(event.target.value);
 	};
 
 	const handleCity = (event: React.FormEvent<HTMLSelectElement>) => {
 		const el = event.target as HTMLSelectElement;
-		setTheCity(el.value);
+		setCity(el.value);
 	};
 
 	const handleSubmit = () => {
-		dispatch(filterByCity(theCity));
-		dispatch(filterByText(product));
+		dispatch(filterByCity(city));
+		dispatch(filterByText(searchQuery));
 	};
 
 	const cities = [
@@ -49,14 +42,14 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 				<div className='sm:my-1 sm:basis-2/5 sm:mx-0.5'>
 					<input
 						className=' border border-slate-300 rounded-md  w-full h-14 p-2 '
-						value={product}
+						value={searchQuery}
 						onChange={handleProduct}
 						placeholder={'What are you looking for ?'}
 					/>
 				</div>
 				<div className='my-3 sm:my-1 sm:basis-2/5 sm:mx-0.5'>
 					<select
-						value={theCity}
+						value={city}
 						onChange={handleCity}
 						className='border border-slate-300 bg-white text-slate-700 rounded-md w-full h-14 p-2'
 					>
@@ -73,7 +66,7 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 						type='button'
 						onClick={() => {
 							handleSubmit();
-							submit(theCity);
+							submit(city, searchQuery);
 						}}
 						className='bg-sky-900 text-white rounded-md p-4 w-full'
 					>
