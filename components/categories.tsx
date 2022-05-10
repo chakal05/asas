@@ -60,13 +60,13 @@ const Categories: React.FC<Props> = ({ submitCategory }) => {
 			<ul className='grid grid-cols-4 gap-4 my-3 '>
 				{categories.map((item, index) => {
 					return (
-						<li key={index} className='text-sm'>
+						<li key={index} className='text-sm sm:text-lg'>
 							<div className='text-center text-slate-700 '>
 								<button
 									onClick={() =>submitCategory(item.title)}
 								>
 									<FontAwesomeIcon
-										className='w-full text-4xl mb-2 text-sky-900'
+										className='w-full text-2xl sm:text-4xl mb-2 text-sky-900'
 										icon={item.icon}
 									/>
 									{item.title}
@@ -80,10 +80,10 @@ const Categories: React.FC<Props> = ({ submitCategory }) => {
 						<Link href={'/categories'}>
 							<a>
 								<FontAwesomeIcon
-									className='w-full text-4xl mb-2 text-sky-900'
+									className='w-full text-2xl sm:text-4xl mb-2 text-sky-900'
 									icon={faLayerGroup}
 								/>
-								{'All category'}
+								{'All'}
 							</a>
 						</Link>
 					</div>
