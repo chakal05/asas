@@ -144,7 +144,7 @@ const Posts = ({
 											icon={faFaceSurprise}
 										/>
 										<p className='text-3xl font-bold my-6 text-sky-900'>
-											No match Found{' '}
+											No {queryString} Found in {location} !
 										</p>
 										<p className='text-xl text-slate-700'>
 											There are no results that match your current filters. Try
