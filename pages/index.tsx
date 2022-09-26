@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { NextPage, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -24,7 +24,7 @@ function Home() {
 
 			<div className=''>
 				<div className='my-9 md:w-4/5 mx-auto'>
-					<p className='text-4xl xl:text-6xl text-sky-900 font-bold text-center '>
+					<p className='text-4xl xl:text-6xl text-sky-900 font-bold text-center p-1'>
 						{`Buy and sell on Djibouti's safest classified ads `}
 					</p>
 				</div>
@@ -35,34 +35,37 @@ function Home() {
 								pathname: '/products/',
 								query: {
 									city,
-									search,
-								},
+									search
+								}
 							});
 						}}
 					/>
 				</div>
 			</div>
 
-			<div className='my-8'>
+			<div className='my-8' >
 				<Categories
 					submitCategory={(category) => {
 						dispatch(filterByCategory(category));
 						const formatedString = category.toLowerCase();
+
 						router.push({
 							pathname: '/products/',
-							query: { category: formatedString },
+							query: {
+								category: formatedString,
+							}
 						});
 					}}
 				/>
 			</div>
 
-			<div className='my-9'>
-				<p className='font-bold text-4xl my-8 text-center text-sky-900'>
+			<div className='my-9   '>
+				<p className='font-bold text-3xl xl:text-4xl my-8 text-center text-sky-900'>
 					{' '}
 					Our Services{' '}
 				</p>
-				<div className='md:flex flex-row px-3 md:px-0 '>
-					<div className='bg-white  shadow-md p-3 my-5 md:my-0  '>
+				<div className='md:flex flex-row px-3 '>
+					<div className='bg-white  shadow-md p-3 my-5  '>
 						<p className='font-bold text-xl text-sky-900'> Lorem Ipsum </p>
 						<p className='text-slate-700'>
 							{' '}
@@ -72,7 +75,7 @@ function Home() {
 							anim id est laborum.{' '}
 						</p>
 					</div>
-					<div className='bg-white shadow-md  p-3 my-5 md:mx-3 md:my-0'>
+					<div className='bg-white shadow-md  p-3 my-5 md:mx-3 '>
 						<p className='font-bold text-xl text-sky-900'> Lorem Ipsum </p>
 						<p className='text-slate-700'>
 							{' '}
@@ -82,7 +85,7 @@ function Home() {
 							anim id est laborum.{' '}
 						</p>
 					</div>
-					<div className='bg-white shadow-md p-3 my-5 md:my-0'>
+					<div className='bg-white shadow-md p-3 my-5 '>
 						<p className='font-bold text-xl text-sky-900'> Lorem Ipsum </p>
 						<p className='text-slate-700'>
 							{' '}
@@ -99,13 +102,16 @@ function Home() {
 }
 
 // export const getServerSideProps = async (context) => {
-// 	const client = await middleware;
-// 	const db = client.db('asas');
-// 	let products = await db.collection('products').insert(fakeData);
-// 	products = JSON.parse(JSON.stringify(products));
+// 	//	const client = await middleware;
+// 	// const db = client.db('asas');
+// 	// let products = await db.collection('products').insert(fakeData);
+// 	// products = JSON.parse(JSON.stringify(products));
+// 	let products= '';
+
 // 	return {
 // 		props: { products },
 // 	};
+
 // };
 
 export default Home;

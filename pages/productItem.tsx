@@ -5,22 +5,29 @@ import type { InferGetServerSidePropsType, NextPage } from 'next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faCircleChevronLeft,
-	faCircleChevronRight,
+	faCircleChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import { getByCategory, getProductById } from '../utils/productsApiCalls';
+import {
+	getByCategory,
+	getProductById,
+	saveProduct
+} from '../utils/productsApiCalls';
+import { useSession } from 'next-auth/react';
 import { getUser } from '../utils/usersApiCalls';
 import { filterCategory } from '../utils/sharedFeatures';
 
 const Product = ({
 	product,
 	sellerInfo,
-	sameCategory,
+	sameCategory
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [productData, setProductData] = useState(product);
 	const [sameCategoryList, setSameCategoryList] = useState(sameCategory);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const { title, description, images, price } = productData;
+	const [response, setResponse] = useState('');
+	const theSession:any  = useSession();
 
 	const nextSlide = () => {
 		let newSlide = currentSlide === images.length - 1 ? 0 : currentSlide + 1;
@@ -32,6 +39,29 @@ const Product = ({
 		setCurrentSlide(newSlide);
 	};
 
+	const save = async (item) => {
+
+
+		if (theSession.status === 'unauthenticated') {
+			// Better error handling
+			setResponse('You need to login first');
+			setTimeout(() => {
+				setResponse('');
+			}, 5000);
+		}
+		if (theSession.status === 'authenticated') {
+			const letSave = {
+				userId: theSession?.data?.user?.id,
+				saved: item?._id
+			};
+			const res = await saveProduct(letSave);
+			setResponse(res.data);
+
+			setTimeout(() => {
+				setResponse('');
+			}, 5000);
+		}
+	};
 	return (
 		<div>
 			<Head>
@@ -49,8 +79,7 @@ const Product = ({
 									return (
 										<div
 											key={index}
-											className={index === currentSlide ? 'block ' : 'hidden'}
-										>
+											className={index === currentSlide ? 'block ' : 'hidden'}>
 											<Image layout='fill' src={img} alt='' />
 										</div>
 									);
@@ -66,8 +95,7 @@ const Product = ({
 						<button
 							type='button'
 							className='flex absolute  top-0 left-0 z-30 justify-center items-center px-1 h-full cursor-pointer group focus:outline-none'
-							onClick={prevSlide}
-						>
+							onClick={prevSlide}>
 							<span className='inline-flex justify-center items-center  '>
 								<FontAwesomeIcon
 									className='w-6 h-6  sm:w-8 sm:h-8 text-sky-900 '
@@ -78,8 +106,7 @@ const Product = ({
 						<button
 							type='button'
 							className='flex absolute top-0  right-0 z-30 justify-center items-center px-1 h-full cursor-pointer group focus:outline-none'
-							onClick={nextSlide}
-						>
+							onClick={nextSlide}>
 							<span className='inline-flex justify-center items-center '>
 								<FontAwesomeIcon
 									className='w-6 h-6  sm:w-8 sm:h-8 text-sky-900'
@@ -99,36 +126,42 @@ const Product = ({
 								</p>
 							</div>
 							<div className='text-right '>
-								<button className='bg-sky-900 text-white p-1 w-16 rounded '>
+								<button
+									onClick={() => save(productData)}
+									className='bg-sky-900 text-white p-1 w-16 rounded '>
 									{' '}
 									SAVE{' '}
 								</button>
 							</div>
 						</div>
+						{response && (
+							<div
+								className={
+									response === 'Added to saved list'
+										? 'p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg'
+										: 'p-4 mb-4 text-sm text-yellow-700  bg-yellow-100 rounded-lg'
+								}
+								role='alert'>
+								<span className='font-bold'> {response} </span>
+							</div>
+						)}
 						<div className=' my-1 w-full  border-b border-gray-300'></div>
-						<div className='my-2 lg:flex p-3 justify-between '>
-							<div>
+						<div className='my-2 p-3 grid grid-cols-2'>
+							<div className='pt-4'>
 								<p className='text-lg text-slate-700 '>
 									{' '}
 									Published by :{' '}
 									<span className='font-bold text-sky-900  '>
-										{sellerInfo.username}
+										{sellerInfo.name || sellerInfo.message}
 									</span>
-								</p>
-								<p className='w-full text-slate-700 '>
-									{' '}
-									Member since:{' '}
-									<span className='text-sky-900 font-bold ml-2'>
-										{' '}
-										{sellerInfo.joined}{' '}
-									</span>{' '}
 								</p>
 							</div>
 
-							<button className=' mt-3 lg:mt-0 bg-sky-900 text-white w-full lg:w-40 rounded p-2'>
-								{' '}
-								SEND MESSAGE{' '}
-							</button>
+							{sellerInfo.image && (
+								<div className='relative w-14 h-14 left-3/4  '>
+									<Image src={sellerInfo.image} alt='sr' layout='fill' />
+								</div>
+							)}
 						</div>
 						<div className='p-3'>
 							<p className='font-bold text-lg text-sky-900 '>
@@ -195,8 +228,7 @@ const Product = ({
 						return (
 							<li
 								key={index}
-								className=' bg-white text-center p-3 shadow-lg rounded-lg border-2  md:mx-0 my-3 mx-2'
-							>
+								className=' bg-white text-center p-3 shadow-lg rounded-lg border-2  md:mx-0 my-3 mx-2'>
 								<button
 									onClick={async () => {
 										const clickedOnProduct = await getProductById(item._id);
@@ -208,14 +240,9 @@ const Product = ({
 											filterCategory(getSameCategory, item._id)
 										);
 										setCurrentSlide(0);
-									}}
-								>
+									}}>
 									<div className='relative w-48 h-44 md:w-40 md:h-40  mx-auto '>
-										<Image
-											src={item.images[0]}
-											layout='fill'
-											alt='ds'
-										/>
+										<Image src={item.images[0]} layout='fill' alt='ds' />
 									</div>
 									<div className='p-1'>
 										<p className=' text-lg'> {item.city} </p>
@@ -253,7 +280,7 @@ export const getServerSideProps = async (context) => {
 	const sameCategory = filterCategory(resCategory, id);
 
 	return {
-		props: { product, sellerInfo, sameCategory },
+		props: { product, sellerInfo, sameCategory }
 	};
 };
 

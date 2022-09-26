@@ -13,6 +13,10 @@
 
 module.exports = {
 	images: {
-		domains: ['fakestoreapi.com', 'ecx.images-amazon.com'],
-	},
+		domains: [
+			'fakestoreapi.com',
+			'ecx.images-amazon.com',
+			'lh3.googleusercontent.com'
+		]
+	}
 };

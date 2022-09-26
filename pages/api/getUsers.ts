@@ -1,19 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import middleware from '../../lib/mongo';
 import { ObjectId } from 'mongodb';
 
-const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
+const getUsers = async (req, res) => {
 	const client = await middleware;
 	const db = client.db('asas');
 
 	if (req.method === 'GET') {
 		const { id } = req.query;
-		let result;
-		if (id) {
-			result = await db.collection('users').findOne({ _id: id });
-		}
 
-		res.json(result);
+		let result = await db
+			.collection('users')
+			.findOne({ _id: new ObjectId(id) });
+
+		if (result) return res.json(result);
+		else {
+			let empty = { message: 'Anonym' };
+			return res.json(empty);
+		}
 	}
 };
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
 import Search from '../components/search';
+import ItemComponent from '../components/itemComponent'
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import { ProductType } from '../interfaces/index';
@@ -22,20 +23,18 @@ import {
 	filterByText,
 } from '../store/filtersSlice';
 
+
 const Posts = ({
 	products,
-	promoted,
+	promoted
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	const [data, setData] = useState(products);
 	const dispatch = useAppDispatch();
 	const { filters } = useAppSelector((state: RootState) => state.filters);
 	const filtered = filter(data, { filters });
-	const { title, city, category } = filters;
-	const [location, setLocation] = useState(city)
-	const [queryString , setQueryString] = useState(title);
-
-
-
+	const { title, city } = filters;
+	const [location, setLocation] = useState(city);
+	const [queryString, setQueryString] = useState(title);
 
 	return (
 		<div>
@@ -51,6 +50,7 @@ const Posts = ({
 						setData(productsByCity);
 						setLocation(passedCity);
 						setQueryString(passedQuery);
+
 					}}
 				/>
 			</div>
@@ -60,11 +60,9 @@ const Posts = ({
 						const productsByCategory = await getByCategory(
 							passedCategory.toLowerCase()
 						);
-						// dispatch(filterByCategory(category));
-						// dispatch(filterByText(''));
+						dispatch(filterByText(''));
 						setData(productsByCategory);
-						setQueryString(passedCategory)
-
+						setQueryString(passedCategory);
 					}}
 				/>
 			</div>
@@ -75,9 +73,11 @@ const Posts = ({
 						<p className='text-xl font-bold md:mr-3'>
 							{location === 'All over Djibouti'
 								? `${
-									queryString ? ` "${queryString}" - ` : ''
+										queryString ? ` "${queryString}" - ` : ''
 								  } On sell throughout Djibouti`
-								: `${queryString ? ` "${queryString}" - ` : ''} On sell in ${city}`}
+								: `${
+										queryString ? ` "${queryString}" - ` : ''
+								  } On sell in ${city}`}
 						</p>
 
 						<p className='text-xl md:pt-[0.55px] text-slate-600'>
@@ -87,53 +87,9 @@ const Posts = ({
 					</div>
 					<div>
 						{filtered.map((item) => {
-							return (
-								<Link
-									href={{
-										pathname: `/productItem/`,
-										query: {
-											id: item._id,
-										},
-									}}
-									passHref
-									key={item._id}
-								>
-									<a>
-										<div className='bg-white my-2 py-1 rounded shadow-lg hover:bg-slate-50  '>
-											<div className='flex py-1 '>
-												<div className='basis-1/5 '>
-													<div className='relative w-32 h-32 mx-auto'>
-														<Image
-															src={item.images[0]}
-															alt='sr'
-															layout='fill'
-														/>
-													</div>
-												</div>
-												<div className='basis-4/5 pl-5 '>
-													<div className='grid grid-cols-2 '>
-														<p className='text-sm sm:text-lg  text-slate-700'>
-															{item.city}
-														</p>
-														<p className='text-right pr-3 text-sm sm:text-lg  text-slate-500'>
-															{' '}
-															{item.added}{' '}
-														</p>
-													</div>
+							return <ItemComponent key={item._id} product={item} />
 
-													<p className='text-md sm:text-xl  my-1 sm:my-3 no-underline hover:underline'>
-														{item.title}
-													</p>
-													<p className='text-lg sm:text-xl text-sky-900 font-bold '>
-														{' '}
-														{item.price} FDj{' '}
-													</p>
-												</div>
-											</div>
-										</div>
-									</a>
-								</Link>
-							);
+
 						})}
 						{!filtered[0] && (
 							<div className='text-center w-4/5 mx-auto px-2 py-6 bg-white shadow-lg rounded-lg border-2 mt-20 mb-40'>
@@ -144,7 +100,7 @@ const Posts = ({
 											icon={faFaceSurprise}
 										/>
 										<p className='text-3xl font-bold my-6 text-sky-900'>
-											No {queryString} Found in {location} !
+											No {queryString} found in {location} !
 										</p>
 										<p className='text-xl text-slate-700'>
 											There are no results that match your current filters. Try
@@ -204,7 +160,7 @@ const Posts = ({
 };
 
 export const getServerSideProps = async (context) => {
-	const { city, category, search } = context.query;
+	const { city, category } = context.query;
 	let products;
 	if (city) {
 		products = await getByCity(city);
@@ -214,11 +170,9 @@ export const getServerSideProps = async (context) => {
 		products = await getByCategory(category);
 	}
 
-
-
 	const promoted = await getPromoted();
 	return {
-		props: { products, promoted, city, search },
+		props: { products, promoted },
 	};
 };
 

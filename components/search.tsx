@@ -11,7 +11,7 @@ type Props = {
 const SearchBox: React.FC<Props> = ({ submit }) => {
 	const dispatch = useAppDispatch();
 	const { filters } = useAppSelector((state: RootState) => state.filters);
-	 const {city, title} = filters;
+	const { city, title } = filters;
 	const [location, setLocation] = React.useState(city);
 	const [searchQuery, setsearchQuery] = React.useState(title);
 
@@ -36,7 +36,7 @@ const SearchBox: React.FC<Props> = ({ submit }) => {
 		'Tadjoura',
 		'Arta',
 		'Obock',
-		'All over Djibouti',
+		'All over Djibouti'
 	];
 
 	return (
