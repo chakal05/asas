@@ -1,5 +1,5 @@
 import { InferGetStaticPropsType } from 'next';
-import { getProviders, getSession } from 'next-auth/react';
+import { getProviders } from 'next-auth/react';
 import BtnLogin from '../components/btnLogin';
 interface Props {
 	providers: {
