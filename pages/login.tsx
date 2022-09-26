@@ -1,12 +1,12 @@
 import { InferGetStaticPropsType } from 'next';
 import { getProviders } from 'next-auth/react';
 import BtnLogin from '../components/btnLogin';
-interface Props {
-	providers: {
-		id: string;
-		name: string;
-	};
-}
+// interface Props {
+// 	providers: {
+// 		id: string;
+// 		name: string;
+// 	};
+// }
 const Login = ({
 	providers
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
