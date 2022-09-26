@@ -6,7 +6,7 @@ import Link from 'next/link';
 const Saved = ({
 	products
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-	const session = useSession();
+	const session:any = useSession();
 	const [theList, setTheList] = useState(products);
 
 	if (session.status === 'unauthenticated') {
