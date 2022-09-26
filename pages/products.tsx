@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { InferGetServerSidePropsType, NextPage } from 'next';
+import type { InferGetServerSidePropsType } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';

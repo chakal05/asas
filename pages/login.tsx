@@ -1,15 +1,10 @@
-import { InferGetStaticPropsType } from 'next';
+import { InferGetServerSidePropsType } from 'next';
 import { getProviders } from 'next-auth/react';
 import BtnLogin from '../components/btnLogin';
-// interface Props {
-// 	providers: {
-// 		id: string;
-// 		name: string;
-// 	};
-// }
+
 const Login = ({
 	providers
-}: InferGetStaticPropsType<typeof getStaticProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 	return (
 		<div className='container'>
 			<p>Not signed in </p>
@@ -21,7 +16,7 @@ const Login = ({
 	);
 };
 
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
 	const providers = await getProviders();
 	return {
 		props: { providers }
