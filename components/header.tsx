@@ -8,7 +8,7 @@ import Link from 'next/link';
 export default function Header() {
 	const [nav, setShowNav] = useState(false);
 	const [logout, setLogout] = useState(false);
-	const theSession = useSession();
+	const theSession:any = useSession();
 
 	const links = [
 		// {

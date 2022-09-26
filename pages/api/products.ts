@@ -23,7 +23,7 @@ products
 	.get(async (req, res) => {
 		const client = await middleware;
 		const db = client.db('asas');
-		const { city, id, category, promoted, savedList } = req.query;
+		const { city, id, category, promoted, savedList } :any = req.query ;
 
 		let result;
 
